@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'menus/index.css' %}" rel="stylesheet">
+    <title>{{ restaurant}}</title>
+    <script defer src="{% static 'scripts/index.js' %}"></script>
+</head>
+<body>
+    <section class="restaurant-name flex-center">
+        <div class="restaurant-name">{{ restaurant.restaurant_name }}</div>
+        <div class="restaurant-name">{{ restaurant.restaurant_location }}</div>
+    </section>
+    <section class="flex-center">
+        <div class="table light-background">Table <span class="table-number">{{ table_number }}</span></div>
+    </section>
+    <section class="restaurant-menu flex-center">
+        <form action="{% url 'menus:get_order' restaurant.restaurant_id table_number %}" class="menu-form light-background" method="post">
+            {% csrf_token %}
+            <div style="display: none;">
+                <input type="text" id="restaurant-id" name="restaurant_id" value="{{ restaurant.restaurant_id }}">
+                <input type="number" id="table-number" name="table_number" value="{{ table_number }}">    
+            </div>
+            {% for item in menu %}
+            <div class="menu-item">
+                <div class="item-image-container">
+                    <img src="{{ item.item_image.url }}" alt="Image of {{ item.item_name }}" class="item-image">
+                </div>
+                <br>
+                <div class="item-name"><span class="item-name">{{ item.item_name}}</span></div>
+                <div>
+                    <div class="item-price">KES:<span id="span-price">{{ item.item_price }}</span></div>
+                    <div class="item-quantity">
+                        <button class="quantity-button reduce-button" type="button">-</button>
+                        <input type="number" name="{{ item.item_id }}" placeholder="0" value="0" class="quantity-input" min="0" readonly>
+                        <button class="quantity-button add-button" type="button">+</button>
+                    </div>
+                </div>
+            </div>
+            <br>
+            {% endfor %}
+            <br>
+            <input type="submit" name="Place-Order" value="Place Order" class="submit-button">
+        </form>
+    </div>
+</body>
+</html>
+

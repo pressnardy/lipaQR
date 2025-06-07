@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ restaurant.restaurant_name }}</title>
+    <link href="{% static 'menus/index.css' %}" rel="stylesheet">
+    <link href="{% static 'menus/order.css' %}" rel="stylesheet">
+    <script defer src="{% static 'scripts/index.js' %}"></script>
+</head>
+<body>
+    <section class="restaurant-name flex-center">
+        <div class=" restaurant-name">{{ restaurant.restaurant_name }}</div>
+        <div class="restaurant-name ">{{ restaurant.restaurant_location }}</div>
+    </section>
+    <section class="flex-center">
+        <div class="table">Table <span class="table-number">{{ table_number }}</span></div>
+    </section>
+    <section class="order flex-center">
+        <form class="menu-form" action="{% url 'menus:place_order' restaurant.restaurant_id table_number %}" method="post">
+            {% csrf_token %}
+            <div>
+                <label>Reference Number:
+                <input id="reference_number" name="reference_number" value="{{ summary.reference_number }}" class="reference_number readonly-input " readonly>
+                </label>
+            </div>
+            <br>
+            <div class="display-none">
+                <label> Table Number:
+                <input id="table-number" name="table_number" value="{{ summary.table_number }}" class="table_number" readonly>
+                </label>
+            </div>
+<!--            <br>-->
+            <div>  
+                <label class="flex-center flex-column">Enter Phone Number for Payment:
+                <input id="phone-number" name="phone_number" value="{{ summary.phone_number }}" class="phone-input" required>
+                </label>
+            </div>
+            <br>
+            <div>
+                <label class="flex-center flex-column">Total Amount:
+                <input id="total-amount" name="total_amount" value="{{ summary.total_amount }}" class="total-amount readonly-input" readonly>
+                </label>
+            </div>
+            <div style="display: none;">
+                <label>Restaurant ID:
+                <input id="restaurant-id" name="restaurant_id" value="{{ summary.restaurant_id }}" class="restaurant_id" display="none" readonly>
+                </label>
+            </div>
+            <div class="flex-center flex-column">
+                <h3>Items</h3>
+
+            </div>
+            {% for item in valid_items %}
+            <div class="item-quantity order-item" id="item-{{ item.item_id }}">
+                <div class="item-name capitalize bold" id="item-{{ item.item_id }}-name">{{ item.item_name }}</div>
+                <div class="item-price">Unit Price:
+                    <span class="price" id="item-{{ item.item_id }}-price">{{ item.item_price }}</span>
+                </div>
+                <div class="item-total capitalize">{{ item.item_name }} Total:
+                    <span class="total" id="item-{{ item.item_id }}-total">{{ item.item_total }}</span>
+                </div>
+                <div class="buttons-wrapper">
+                    <div class="quantity-label">Quantity</div>
+                    <button type="button" class="quantity-button reduce-button" id="item-{{ item.item_id }}-reduce">-</button>
+                    <input class="readonly-input quantity-input" id="item-{{ item.item_id }}-quantity" name="{{ item.item_id }}" value="{{ item.item_quantity }}" min="0" readonly>
+                    <button type="button" class="quantity-button add-button" id="item-{{ item.item_id }}-increment">+</button>
+                </div>
+                <br>
+            </div>
+            {% endfor %}
+            <br>
+            <div>
+                <button class="submit-button" type="submit">Pay Order</button>
+            </div>
+        </form>
+    </section>
+    <section id="invalid-items">
+        {% if invalid_items %}
+        <div class="title">
+            <div>The following items were  not available menu.</div>
+            <ul>
+                {% for item in invalid_items %}
+                <li>{{ item.item_name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </section>
+    </section>
+</body>
+</html>
+
