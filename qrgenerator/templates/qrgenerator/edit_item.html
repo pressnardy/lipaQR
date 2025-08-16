@@ -1,0 +1,39 @@
+{% extends 'qrgenerator/menu.html' %}
+
+{% load static %}
+
+{% block workspace %}
+<div class="form-wrapper">
+    <div class="form-title"><h3>Edit Details<button type="submit" form="form-remove" class="remove">X</button>
+    <button type="submit" form="form-edit" class="button-save" id="button-save-top">Save</button>
+    </h3></div>
+    {% if form.errors %}{{ form.errors }}{% endif %}
+    {% if message %}<div class="message">{{ message }}</div>{% endif %}
+    <form method="post" action="" id="form-edit" class="form-register order-summary max-w-600">
+        {% csrf_token %}
+        <div class="input-wrapper"><div class="label">NAME</div>
+            {{ form.name }}
+        </div>
+        <div class="input-wrapper"><div class="label">UNIT</div>
+            {{ form.unit }}
+        </div>
+        <div class="input-wrapper"><div class="label">UNIT PRICE</div>
+            {{ form.unit_price }}
+        </div>
+        <div class="input-wrapper"><div class="label">AVAILABILITY</div>
+            {{ form.available }}
+        </div>
+        <div class="input-wrapper description"><div class="label">DESCRIPTION</div>
+            {{ form.description }}
+        </div>
+    </form>
+    <div class="remove">
+        <form id="form-remove" action="{% url 'qrgenerator:remove_item' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" value="{{ form.instance.item_id }}" name="item_id">
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+

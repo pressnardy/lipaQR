@@ -1,0 +1,24 @@
+{% extends 'qrgenerator/menu.html' %}
+
+{% load static %}
+
+{% block workspace %}
+<div class="form-wrapper">
+    {% if message %} <div class="message-success">{{ message }}</div>{% endif %}
+    {% if form.errors %}{{ form.errors }}{% endif %}
+    <div class="form-title"><h3>Generate QR Codes</h3></div>
+    <form action="" method="post" enctype="multipart/form-data" class="order-summary min-w-400">
+        {% csrf_token %}
+        <div class="input-wrapper"><div class="label">TOTAL TABLES</div>
+            <input type="number" class="form-input" id="tables" name="tables" placeholder="Enter Number of Tables" required>
+        </div>
+        <br>
+        <br>
+        <div class="input-wrapper">
+            <button type="submit" class="button-save" id="button-save">Run</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
+

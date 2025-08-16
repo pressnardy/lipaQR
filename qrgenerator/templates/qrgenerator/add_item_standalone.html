@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Items</title>
+    <link rel="stylesheet" href="{% static 'qrgenerator/register.css' %}">
+</head>
+<body>
+    <section class="registration">
+        <div class="registration-nav">
+            <div>
+                <a class="back"><svg fill="currentColor" height="22" viewBox="0 0 22 22" width="22" 
+                    xmlns="http://www.w3.org/2000/svg"><path 
+                    class="back-arrow-path" 
+                    d="M15.75 4H13L6 11L13 18H15.75L8.75 11L15.75 4Z"></path>
+                </svg>Back</a>                
+            </div>
+            <div>
+                <a class="login-register">Done</a>                
+            </div>
+        </div>
+        <div class="form-wrapper">
+            <div class="form-title"><h1>Item Details</h1></div>
+            <form action="" class="form-register">
+                {% csrf_token %}
+                <div class="input-wrapper"><div class="label">NAME</div>
+                    <input type="text" class="form-input" id="item-name" name="name" placeholder="Item Name" required>
+                </div>
+                <div class="input-wrapper"><div class="label">DESCRIPTION</div>
+                    <input type="text" class="form-input" id="" name="description" placeholder="Shot catchy description" required>
+                </div>
+                <div class="input-wrapper"><div class="label">UNIT</div>
+                    <input type="text" class="form-input" id="unit" name="unit" placeholder="unit like 1kg, 1/4chicken, 1plate" required>
+                </div>
+                <div class="input-wrapper"><div class="label">UNIT PRICE</div>
+                    <input type="number" class="form-input" id="unit-price" name="unit_price" Placeholder="Unit Price" required>
+                </div>
+                <div class="input-wrapper"><div class="label">IMAGE</div>
+                    <input type="file" class="form-input" id="" name="image" Placeholder="Upload Image" required>
+                </div>
+                <br>
+                <br>
+                <div class="input-wrapper">
+                    <button type="submit" class="button-register" id="button-register" value="Register">Add</button>
+                </div>
+            </form>
+        </div>
+    </section>
+</body>
+</html>

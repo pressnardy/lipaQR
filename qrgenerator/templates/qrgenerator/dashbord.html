@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account</title>
+    <link rel="stylesheet" href="{% static 'qrgenerator/accounts.css' %}">
+    <link rel="stylesheet" href="{% static 'qrgenerator/workspace.css' %}">
+    <link rel="stylesheet" href="{% static 'qrgenerator/stats.css' %}">
+    <script defer src="{% static 'qrgenerator/scripts/validations.js' %}"></script>
+    
+</head>
+<body>
+<section class="page-header">
+        <div class="header-top">
+            <div class="page-title">
+                <span id="lipa">Lipa</span> <span id="q">Q</span><span>R</span>
+            </div>
+            <div class="restaurant-name">Moria Juja</div>
+            <div class="header-right">
+                <a href="{% url 'qrgenerator:get_qrs' %}">
+                    <div class="gen-codes">Get QR Codes</div>
+                </a>
+            </div>
+        </div>
+</section>
+<section class="main-section">
+    <div class="main-section-left bg-light-gray">
+        <div class="menu-left bg-white">
+            <div>
+                <div class="menu-left-item">
+                    <a href="{% url 'qrgenerator:menu' %}">Menu</a>
+                </div>
+                <div class="menu-left-item">
+                    <a href="{% url 'qrgenerator:pending' %}">Pending</a>
+                </div>
+                <div class="menu-left-item">
+                    <a href="{% url 'qrgenerator:paid' %}">Paid</a>
+                </div>
+            </div>
+            <div class="menu-left-item">
+                <div class="logout">
+                    <a href="{% url 'qrgenerator:logout' %}"><div>Log Out</div></a>
+                </div>
+            </div>
+        </div>
+        {% block menu_elements %}
+        <div class="menu-elements bg-white">
+            <div class="elements-top">
+                <div class="elements-title">Paid orders</div>
+                <button class="add-btn"><span class="plus-sign">+</span></button>
+            </div>
+            <div class="elements-wrapper">
+                <div class="element-highlight">00100001: KES: 40000.00 </div>
+                <div class="element-highlight">00100001: KES: 40000.00 </div>
+                <div class="element-highlight">00100001: KES: 40000.00 </div>
+            </div>
+        </div>
+        {% endblock %}
+    </div>
+    <div class="workspace">
+        <div id="search-wrapper">
+            <form action="" method="post" id="search-form">
+                <div id="query-wrapper">
+                    <input type="search" name="query" id="input-search" required placeholder="Enter order id or ref no. or phone no.">
+                </div>
+                <button type="submit" id="button-search">Go</button>
+            </form>
+        </div>
+        {% block workspace %}
+        <div class="form-wrapper">
+            <div class="form-title"><h3>Order Details</h3></div>
+            <div class="order-summary">
+                <div class="width-250">
+                    <div class="input-wrapper">
+                        <div class="label">Order ID:</div>
+                        <div class="form-input">12001</div>
+                    </div>
+                    <div class="input-wrapper">
+                        <div class="label">Phone Number:</div>
+                        <div class="form-input">0708465763</div>
+                    </div>
+                    <div class="input-wrapper"><div class="label">Total:</div>
+                        <div class="form-input">KES: 3000.00</div>
+                    </div>
+                    <div class="input-wrapper">
+                        <div class="label">Status:</div>
+                        <div class="status">Pending
+                            <div class="info-box">Set the order status to paid</div>
+                            <form method="POST" action="" class="paid-btn-wrapper">
+                                {% csrf_token %}
+                                <input type="hidden" value="order_id">
+                                <button type="submit" class="mark-paid">Mark Paid</button>
+                                <!-- <div class="info-box">set the order status to paid</div> -->
+                            </form>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+                <div class="width-250 padding-left-10">
+                <div class="label items-title">Items</div>
+                <ol>
+                    <li>
+                        <div class="item-wrapper">
+                            <div class="item-descriptio">1/4 Chicken</div>
+                            <div class="item-total">KES:800</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-wrapper">
+                            <div class="item-descriptio">1/4 Chicken</div>
+                            <div class="item-total">KES:800</div>
+                        </div>
+                    </li>
+                </ol>
+                </div>
+            </div>
+        </div>
+        {% endblock %}
+    </div>
+    <div class="stats">
+        <div class="stats-item">
+            <div class="period-title">Daily</div>
+            <div class="orders-sold">1234</div>
+            <div class="total-value">40000</div>
+            <div class="average">3000</div>
+        </div>
+        <div class="stats-item">
+            <div class="period-title">Daily</div>
+            <div class="orders-sold">1234</div>
+            <div class="total-value">40000</div>
+            <div class="average">3000</div>
+        </div>
+        <div class="stats-item">
+            <div class="period-title">Daily</div>
+            <div class="orders-sold">1234</div>
+            <div class="total-value">40000</div>
+            <div class="average">3000</div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

@@ -47,7 +47,9 @@ def place_order(request, restaurant_id, table_number):
             return HttpResponse("Invalid restaurant or table number.", status=400)
         restaurant = util.get_restaurant(restaurant_id=restaurant_id)
         form.instance.restaurant = restaurant
-        form.save()
+        form.instance.table_number = form_table_number
+        order = form.save()
+        print(order)
         items = util.get_ordered_items(request.POST)
         util.save_to_pending(items, order=form.instance)
         return redirect(
@@ -61,16 +63,10 @@ def pay_order(request, restaurant_id, table_number, reference_number):
     order = Order.objects.filter(reference_number=reference_number, paid=False).first()
     if request.method == 'POST':
         restaurant = util.get_restaurant(restaurant_id=restaurant_id)
-        reference_number = request.POST['reference_number']
-        if util.is_successful_payment(reference_number):
-            order.paid = True
-            order.restaurant = restaurant
-            items = order.items
-            order.save()
-            util.set_to_paid(items)
+        if reference_number := request.POST['reference_number']:
+            util.send_stk_push(restaurant, reference_number)
             return render(request, 'menus/payment_success.html', {'order': order})
         return render(request, 'menus/payment_failed.html', {'order': order})
-
     return render(request, 'menus/pay.html', {'order': order})
 
 

@@ -1,5 +1,4 @@
 import requests
-# import mpesa_settings
 from mpesa import mpesa_settings
 
 STK_REQUEST_BODY = mpesa_settings.STK_REQUEST_BODY

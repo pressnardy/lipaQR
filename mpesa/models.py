@@ -11,9 +11,16 @@ class Payment(models.Model):
     timestamp = models.IntegerField(null=True, blank=False)
     reference_number = models.CharField(max_length=12, unique=True, blank=False)
 
-    @staticmethod
-    def latest(reference_number):
-        return Payment.objects.filter(reference_number=reference_number).order_by('-payment_id').first()
+    @classmethod
+    def get_payment(cls, reference_number):
+        return cls.objects.get(reference_number=reference_number)
+    
+    @classmethod
+    def get_latest(cls, lookup_quantity=20, starting=None):
+        if not starting:
+            return cls.objects.all().order_by('-payment_id')[:lookup_quantity]
+        return cls.objects.all().order_by('-payment_id')[starting:lookup_quantity]
+        
 
     def __str__(self):
         return f"Payment: (Amount: {self.amount}, escort_id: {self.escort_id}, Date: {self.timestamp})"

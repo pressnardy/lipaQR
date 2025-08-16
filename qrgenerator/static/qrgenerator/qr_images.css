@@ -1,0 +1,97 @@
+
+:root {
+    --background-color: #fceae0;
+    --light-background: rgb(228, 225, 225);
+    --dark-gray: #2a353d;
+    --white: #ffffff;
+    --black: #000000;
+    --accent-b: #f35217;
+    --brown: #862603;
+    --gray: rgb(163, 163, 163);
+    --info-orange: rgb(236, 155, 4);
+    --green: green;
+    --light-green: rgb(17, 18, 19);
+}
+
+body {
+    font-family: Arial, sans-serif;
+    letter-spacing: 2px;
+    font-size: 16px;
+    width: 100vw;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.page-heading {
+    padding:0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.page-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    white-space: nowrap;
+    gap: 20px;
+    width: 60%;
+}
+
+.lipa-qr {
+    color: rebeccapurple;
+}
+
+.restaurant-name, .location {
+    text-transform: capitalize;
+}
+
+span.location {
+    text-transform: capitalize;
+}
+
+.restaurant-name {
+    padding: 10px;
+    /* text-transform: capitalize; */
+}
+
+.dashboard {
+    padding: 10px 15px;
+    background: rgb(26, 25, 25);
+    color: white;
+    margin-right: 10px;
+    border-radius: 10px;
+}
+
+.main-section {
+    text-align: center;
+}
+
+.qr-codes-wrapper {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+h3 {
+    text-transform: capitalize;
+}
+
+.btn-download {
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    background: rebeccapurple;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+}

@@ -1,0 +1,74 @@
+{% extends 'qrgenerator/dashbord.html' %}
+
+{% block menu_elements %}
+
+<div class="menu-elements bg-white">
+    <div class="elements-top">
+        <div class="elements-title">Pending orders</div>
+        <button class="add-btn"><span class="plus-sign">+</span></button>
+    </div>
+    <div class="elements-wrapper">
+        {% if orders %}
+        {% for order in orders %}
+        <a href="{% url 'qrgenerator:pending' order.order_id %}">
+        <div class="element-highlight">{{ order.phone_number }} | KES: {{ order.amount }}  </div>
+        </a>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
+
+{% block workspace %}
+<!-- <div class="workspace"> -->
+    <div class="form-wrapper">
+        <div class="form-title"><h3>Order Details</h3></div>
+        <div class="order-summary">
+            <div class="width-250">
+                {% if display_order %}
+                <div class="input-wrapper">
+                    <div class="label">Reference no:</div>
+                    <div class="form-input"> {{ display_order.reference_number }} </div>
+                </div>
+                <div class="input-wrapper">
+                    <div class="label">Phone Number:</div>
+                    <div class="form-input"> {{ display_order.phone_number }}</div>
+                </div>
+                <div class="input-wrapper"><div class="label">Total:</div>
+                    <div class="form-input">KES:  {{ display_order.total_amount }}</div>
+                </div>
+                <div class="input-wrapper">
+                    <div class="label">Status:</div>
+                    <div class="status"> {% if not display_order.paid %}Pending{% endif %}
+                        <div class="info-box">Set the order status to paid</div>
+                        <form method="POST" action="" class="paid-btn-wrapper">
+                            {% csrf_token %}
+                            <input type="hidden" value="1">
+                            <button type="submit" class="mark-paid">Mark Paid</button>
+                            <!-- <div class="info-box">set the order status to paid</div> -->
+                        </form>
+                    </div>
+                </div>
+                <br>
+                {% endif %}
+            </div>
+            <div class="width-250 padding-left-10">
+            <div class="label items-title">Items</div>
+            {% if display_order %}
+            <ol>
+                {% for item in display_order.items_ordered %}
+                <li>
+                    <div class="item-wrapper">
+                        <div class="item-description">{{ item.item.name }}</div>
+                        <div class="item-total">KES:{{ item.total }} </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ol>
+            {% endif %}
+            </div>
+        </div>
+    <!-- </div> -->
+</div>
+{% endblock %}

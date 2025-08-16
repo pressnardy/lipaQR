@@ -1,0 +1,42 @@
+{% extends 'qrgenerator/menu.html' %}
+
+{% load static %}
+
+{% block workspace %}
+<div class="form-wrapper">
+    {% if message %} <div class="message-success">{{ message }}</div>{% endif %}
+    {% if form.errors %}{{ form.errors }}{% endif %}
+    <div class="form-title"><h3>Add Item</h3></div>
+    <form action="" method="post" enctype="multipart/form-data" class="form-register order-summary max-w-600">
+        {% csrf_token %}
+        <div class="input-wrapper"><div class="label">NAME</div>
+            <input type="text" class="form-input" id="item-name" name="name" placeholder="Item Name" required>
+        </div>
+        <div class="input-wrapper"><div class="label">UNIT</div>
+            <input type="text" class="form-input" id="unit" name="unit" placeholder="unit like 1kg, 1/4chicken, 1plate" required>
+        </div>
+        <div class="input-wrapper"><div class="label">UNIT PRICE</div>
+            <input type="number" class="form-input" id="unit-price" name="unit_price" Placeholder="Unit Price" required>
+        </div>
+        <div class="input-wrapper"><div class="label">IMAGE</div>
+            <input type="file" class="form-input" id="input-file" name="image" Placeholder="Upload Image" required>
+        </div>
+        <div class="input-wrapper"><div class="label">AVAILABILITY</div>
+            <select name="available" id="available" class="available">
+                <option value="available">Available</option>
+                <option value="unavailable">Unavailable</option>
+            </select>
+        </div>
+        <div class="input-wrapper description"><div class="label">DESCRIPTION</div>
+            <textarea type="text" class="form-input item-description" id="item-description" name="descripion" placeholder="Shot catchy description"></textarea>
+        </div>
+        <br>
+        <br>
+        <div class="input-wrapper">
+            <button type="submit" class="button-save" id="button-save">Save</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
+

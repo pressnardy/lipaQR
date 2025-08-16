@@ -1,17 +1,21 @@
 
 :root {
-    --accent-color: #fa9672;
+    /* --accent-color: #fa9672; */
+    --accent-color: #f35217;
     --background-color: #fceae0;
     --light-background: #fdeee5;
     --dark-gray: #2a353d;
     --white: #ffffff;
     --black: #000000;
+    --accent-b: #f35217;
 }
 
 body {
     background-color: var(--background-color);
-    color: var(--dark-gray);
+    /* color: var(--dark-gray); */
     font-family: Arial, sans-serif;
+    letter-spacing: 2px;
+    font-size: 16px;
 
 }
 
@@ -19,14 +23,14 @@ body {
 
     font-size: 1.5em;
     font-weight: bold;
-    color: var(--accent-color);
+    color: var(--accent-2);
     margin-top: 20px;
     text-transform: capitalize;
 }
 
 .table {
     margin: 10px 20px;
-    font-size: 1.0em;
+    font-size: 1.2em;
     font-weight: bold;
 }
 
@@ -46,7 +50,7 @@ body {
 
 
 .restaurant-menu {
-    background-color: var(--background-color);
+    /* background-color: var(--background-color); */
 
 }
 
@@ -56,10 +60,19 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-sizing: border-box;
     width: 100%;
     max-width: 550px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: var(--background-color);
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    background: var(--white);
+    /* border: 1px solid var(--accent-color); */
+    border-radius: 15px;
+}
+
+.menu-item {
+    border: 1px solid var(--accent-b);
+    padding: 10px;
+    border-radius: 15px;
 }
 
 .item-image-container {
@@ -79,6 +92,44 @@ img.item-image {
 
 .item-name {
     padding: 5px 0;
+}
+
+.onborder-name {
+    position: relative;
+    left: 10px;
+    bottom: 25px;
+    padding: 5px 10px 0px 10px;
+    background: var(--light-background);
+    color: var(--accent-b);
+    text-transform: capitalize;
+    font-size: 1.2em;
+}
+
+.height-0 {
+    height: 0;
+}
+
+.item-details {
+    padding: 5px;
+}
+
+.item-calcs {
+    padding-left: 5px;
+}
+
+.totals {
+    padding-bottom: 5px;
+    color: var(--accent-b);
+}
+
+.item-price {
+    /* font-weight: bold; */
+    color: #000000;
+    font-size: 16px;
+}
+
+.unit {
+    text-transform: capitalize;
 }
 
 .item-quantity {
@@ -103,7 +154,7 @@ img.item-image {
     background-color: var(--light-background);
     border-radius: 5px;
     font-size: 1.2em;
-    color: var(--dark-gray);
+    color: var(--accent-b);
     /*padding-left: 5px;*/
 }
 
@@ -116,13 +167,14 @@ span.item-name {
 
 .submit-button {
     border-radius: 10px;
-    font-size: 1.2em;
-    padding: 10px 15px;
+    font-size: 1.5em;
+    padding: 15px 20px;
     color: var(--white);
-    background-color: var(--accent-color);
-    border: 1px solid var(--accent-color);
+    background-color: var(--accent-b);
+    border: 1px solid var(--accent-b);
     margin-top: 20px;
     cursor: pointer;
+    letter-spacing: 2px;
 }
 
 .flex-center {

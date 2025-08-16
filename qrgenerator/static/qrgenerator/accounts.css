@@ -1,0 +1,233 @@
+
+:root {
+    --background-color: #fceae0;
+    --light-background: rgb(228, 225, 225);
+    --dark-gray: #2a353d;
+    --white: #ffffff;
+    --black: #000000;
+    --accent-b: #f35217;
+    --brown: #862603;
+    --gray: rgb(163, 163, 163);
+    --info-orange: rgb(236, 155, 4);
+    --green: green;
+    --light-green: rgb(17, 18, 19);
+}
+
+html {
+    /* height: 100%; */
+}
+
+body {
+    background-color: rgb(228, 225, 225);
+    font-family: Arial, sans-serif;
+    letter-spacing: 2px;
+    font-size: 16px;
+    width: 100vw;
+    min-width: 1000px;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    height: 100vh;
+    
+}
+
+section {
+    /* padding: 0 0px; */
+}
+
+.page-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: fit-content;
+    min-width: 100vw;
+    box-sizing: border-box;
+    margin-bottom: 4px;
+    box-sizing: border-box;
+}
+
+.header-top {
+    padding: 10px 0px;
+    padding-left: 10px;
+    padding-right: 0;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    gap: 10px;
+    background: var(--white);
+    
+    
+
+}
+
+.header-right {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.gen-codes  {
+    padding: 10px 15px;
+    border-radius: 15px;
+    margin-right: 20px;
+    /* margin-bottom: 10px; */
+    box-sizing: border-box;
+    background: rebeccapurple;
+    color: white;
+    min-height: fit-content;
+}
+
+.page-title {
+    font-weight: bold;
+    white-space: nowrap;
+    
+}
+
+.restaurant-name {
+    white-space: nowrap;
+}
+
+.registration {
+    text-align: center;
+}
+
+.registration-nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 40px;
+    box-sizing: border-box;
+
+}
+
+.main-section {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 4px;
+    height: 90%;
+    max-width: 98vw;
+}
+
+.main-section-left {
+    display: flex;
+    flex-wrap: nowrap;
+    grid: 2px;
+    /* width: 340px; */
+    width: fit-content;
+    box-sizing: border-box;
+    height: 100%;
+    background: var(--white);
+        
+}
+
+.menu-left {
+    height: 100%;
+    padding-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid rebeccapurple;
+    margin-right: 4px;
+    padding-right: 10px;
+    border-radius: 0 5px 5px 0;
+    
+    
+}
+
+.menu-left-item {
+    margin-bottom: 20px;
+    padding: 10px 0px;
+    text-align: left;
+    /* border: 1px solid var(--accent-b); */
+    font-size: 12px;
+    color: rebeccapurple;
+}
+
+.logout {
+    justify-self: flex-end;
+}
+
+.menu-elements {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    /* width: 220px; */
+    border-radius: 5px;
+
+}
+
+
+.elements-top {
+    color: var(--green);
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    /* margin-bottom: 20px; */
+    letter-spacing: normal;
+    padding: 5px 5px 10px 5px;
+    box-sizing: border-box;
+    border-bottom: 1px solid var(--gray);
+}
+
+.add-btn {
+    
+    text-transform: capitalize;
+    white-space: nowrap;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid var(--green);
+    background: none;
+    color: var(--green);
+    word-spacing: 4px;
+}
+
+.plus-sign {
+    font-size: 20px;
+}
+
+.elements-wrapper {
+    text-align: left;
+    padding: 10px 0;
+    /* min-width: fit-content; */
+    width: 260px;
+
+}
+
+.element-highlight {
+    display: inline-block;
+    white-space: nowrap;
+    font-size: 12px;
+    padding:10px;
+    box-sizing: border-box;
+    border-bottom: 1px solid var(--gray);
+    width: 100%;
+}
+
+.bg-light-gray {
+    background: var(--light-background);
+}
+
+.bg-white {
+    background: var(--white);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+button {
+    cursor: pointer;
+}
+
+.item-property {
+    margin-right: 5px;
+}

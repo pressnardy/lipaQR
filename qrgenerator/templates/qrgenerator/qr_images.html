@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=" {% static 'qrgenerator/qr_images.css' %} ">
+    <script defer src="{% static 'qrgenerator/scripts/qr_images.js' %}"></script>
+    <title>QR Codes</title>
+</head>
+<body>
+    <section class="page-heading">
+        <div class="page-title">
+            <div class="lipa-qr"><h1>Lipa QR</h1></div>
+            <div class="restaurant-name"><span>{{ restaurant.name }}</span> <span class="location">{{ restaurant.location }}</span></div>
+        </div>
+        <nav>
+            <a href="{% url 'qrgenerator:account' %}" class="dashboard">Dashboard</a>
+            <a href="{% url 'qrgenerator:logout' %}">Logout</a>
+        </nav>
+    </section>
+    <section class="main-section">
+        <h1>QR Codes</h1>
+        <div>
+            <button class="btn-download" id="btn-download">Download Images</button>
+        </div>
+        <div class="qr-codes-wrapper" id="qr-codes-wrapper">
+            {% for i in qr_urls %}
+                <div class="qr-code">
+                    <img src="{% static i %}" alt="QR Code image">
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+</body>
+</html>

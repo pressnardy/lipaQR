@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="{% static 'qrgenerator/register.css' %}">
+    <script defer src="{% static 'qrgenerator/scripts/registration.js' %}"></script>
+</head>
+<body>
+    <section class="registration">
+        <div class="registration-nav">
+            <div>
+                <a class="back"><svg fill="currentColor" height="22" viewBox="0 0 22 22" width="22" 
+                    xmlns="http://www.w3.org/2000/svg"><path 
+                    class="back-arrow-path" 
+                    d="M15.75 4H13L6 11L13 18H15.75L8.75 11L15.75 4Z"></path>
+                </svg>Back</a>                
+            </div>
+            {% if errors %}
+            {{ errors }}
+            {% endif %}
+            <div>
+                <a href="{% url 'qrgenerator:login' %}" class="login-register">Log In</a>                
+            </div>
+        </div>
+        <div class="form-wrapper">
+            <div class="form-title"><h1>Create Accout</h1></div>
+            <form action="" method="POST" class="form-register">
+                {% csrf_token %}
+                <div class="input-wrapper"><div class="label">EMAIL</div>
+                    <input type="email" class="form-input" id="email" name="username" placeholder="Email" required>
+                </div>
+                <div class="input-wrapper"><div class="label">PHONE</div>
+                    <input type="tel" class="form-input" id="phone-number" name="first_name" placeholder="Phone" required>
+                </div>
+                <div class="input-wrapper"><div class="label">PASSWORD</div>
+                    <input type="password" class="form-input" id="password" name="password1" placeholder="password" required>
+                    <span id="eye-wrapper"></span>
+                </div>
+                <div class="input-wrapper"><div class="label">CONFIRM PASSWORD</div>
+                    <input type="password" class="form-input" id="password2" name="password2" Placeholder="confirm Password" required>
+                </div>
+                <br>
+                <br>
+                <div class="input-wrapper">
+                    <button type="submit" class="button-register" id="button-register" value="Register">Register</button>
+                </div>
+            </form>
+        </div>
+    </section>
+</body>
+</html>

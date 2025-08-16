@@ -27,11 +27,21 @@ function setTotal() {
     const orderItems = document.querySelectorAll('.order-item')
     orderItems.forEach(item => {
         const itemId = item.id
-        const itemPrice = item.querySelector(`#${itemId}-price`).innerText
-        const itemQuantity = item.querySelector(`#${itemId}-quantity`).value
-        const totalElement = item.querySelector(`#${itemId}-total`)
+        const itemPrice = item.querySelector(`#${itemId}-price`)?.innerText || null
+        // console.log(itemId)
+        if (!itemPrice){
+            console.error(`#${itemId}-price not found`)
+        }
+        const itemQuantity = item.querySelector(`#${itemId}-quantity`)?.value
+        const totalElement = item.querySelector(`#${itemId}-total`) || null;
+        if (!totalElement) {
+            console.error(`#${itemId}-total not found`)
+        }
         totalElement.innerText = (Number(itemQuantity) * itemPrice).toString();
-        console.log(totalElement.innerText)
+        // console.log(totalElement.innerText)
     })
 }
 
+function setMenuTotal () {
+
+}

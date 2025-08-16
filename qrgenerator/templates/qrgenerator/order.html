@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order</title>
+    <link rel="stylesheet" href="{% static 'qrgenerator/order.css' %}">
+    <script defer src="{% static 'qrgenerator/scripts/orderEvents.js' %}"></script>
+</head>
+<body>
+    <section class="registration">
+        <div class="form-wrapper">
+            <div class="form-title"><h1>Order Details</h1></div>
+            <div class="order-summary">
+                {% csrf_token %}
+                <div class="input-wrapper">
+                    <div class="label">Order ID:</div>
+                    <div class="form-input">12001</div>
+                </div>
+                <div class="input-wrapper">
+                    <div class="label">Phone Number:</div>
+                    <div class="form-input">0708465763</div>
+                </div>
+                <div class="input-wrapper"><div class="label">Total:</div>
+                    <div class="form-input">KES: 3000.00</div>
+                </div>
+                <div class="input-wrapper">
+                    <div class="label">Status:</div>
+                    <div class="status">Pending
+                        <div class="info-box">Set the order status to paid</div>
+                        <form method="POST" action="" class="paid-btn-wrapper">
+                            {% csrf_token %}
+                            <input type="hidden" value="1">
+                            <button type="submit" class="mark-paid">Mark Paid</button>
+                            <!-- <div class="info-box">set the order status to paid</div> -->
+                        </form>
+                    </div>
+                </div>
+                <br>
+                <div>
+                    <div class="items-wrapper" id="button-register" value="Register">
+                        <div class="label items-title">Items</div>
+                        <ol>
+                            <li>
+                                <div class="item-wrapper">
+                                    <div class="item-descriptio">1/4 Chicken</div>
+                                    <div class="item-total">KES:800</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-wrapper">
+                                    <div class="item-descriptio">1/4 Chicken</div>
+                                    <div class="item-total">KES:800</div>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lipa GR</title>
+</head>
+<body>
+    <section id="page-header">
+        <div id="page-title">LIPA QR</div>
+        <nav>
+            <div id="registration">
+                <a>Login</a>
+            </div>
+            <div id="login">
+                <a>Register</a>
+            </div>
+        </nav>
+        <div id="tagline">Supercharge Your Services with QR Code Powered Menus, Orders and Payments</div>
+    </section>
+    <section id="steps">
+
+    </section>
+    <section class="flex-center flex-col">
+        <h1>Generate GR Codes</h1>
+        <form action="" method="post">
+            {% csrf_token %}
+            <label>Enter restaurant id:
+            <input type="number" id="text" name="restaurant_id" required>
+            </label>
+            <label>Enter Number of Tables:
+            <input type="number" id="text" name="tables" required>
+            </label>
+            <button type="submit">Generate QR Codes</button>
+        </form>
+    </section>
+</body>
+</html>

@@ -1,59 +1,138 @@
 from django.db import models
+from django.contrib.auth.models import User
+
+class LowercaseTextField(models.CharField):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def pre_save(self, model_instance, add):
+        value = getattr(model_instance, self.attname)
+        if value is None:
+            return value
+        if not isinstance(value, str):
+            value = str(value)
+        return value.lower().strip()
 
 
 # Create your models here.
 class Restaurant(models.Model):
     restaurant_id = models.AutoField(primary_key=True)
-    restaurant_name = models.CharField(max_length=100)
-    restaurant_location = models.CharField(max_length=100)
-    till_number = models.IntegerField(null=True)
-    
+    name = LowercaseTextField(max_length=100, null=True, blank=False)
+    location = LowercaseTextField(max_length=50, null=True, blank=False)
+    email = models.EmailField(unique=True, null=True, blank=False)
+    phone_number = models.CharField(max_length=20, null=True, blank=False)
+    till_number = models.IntegerField(null=True, blank=False)
+    created_by = models.OneToOneField(User, on_delete=models.SET_NULL, null=True)
+
     @property
     def menu(self):
         return self.items.filter(available=True)
+    
+    def items(self):
+        return self.items.all()
 
+    def in_menu(self, item_name=None, item_id=None):
+        if item_name:
+            if item := self.items.filter(available=True, name=item_name).first():
+                return True
+        if item_id:
+            if item := self.items.filter(available=True, item_id=item_id).first():
+                return True
+        return False
+        
+    def paid_orders(self, quantity=-1):
+        return self.orders.filter(paid=True).order_by('-order_id')[:quantity]
+    
+    def pending_orders(self, quantity=-1):
+        return self.orders.filter(paid=False).order_by('-oder_id')[:quantity]
+    
+    def items_unavailable(self):
+        return self.items.filter(available=False)
+    
     def __str__(self):
-        return f"{self.restaurant_name}: {self.restaurant_location}"
+        return f"{self.name}: {self.location}"
 
 
 class Item(models.Model):
     item_id = models.AutoField(primary_key=True)
-    item_name = models.CharField(max_length=100)
-    item_description = models.CharField(max_length=255, blank=True)
-    item_price = models.DecimalField(max_digits=10, decimal_places=2)
-    item_image = models.FileField(upload_to='item_images/', blank=True, null=True)
+    name = LowercaseTextField(max_length=100, null=True, blank=False)
+    description = models.CharField(max_length=255, blank=True)
+    unit = models.CharField(max_length=50, null=True, blank=False)
+    unit_price = models.DecimalField(max_digits=10, decimal_places=2)
+    image = models.FileField(upload_to='item_images/', blank=False, null=True)
     available = models.BooleanField(default=True)
-    restaurant = models.ForeignKey(Restaurant, related_name="items", on_delete=models.CASCADE)
+    restaurant = models.ForeignKey(Restaurant, related_name="items", on_delete=models.SET_NULL, null=True, blank=True)
 
+    @classmethod
+    def get(cls, item_id):
+        return cls.objects.filter(item_id=item_id).first()
+        
     def __str__(self):
-        return f"{self.item_name}: {self.item_price}"
-
+        return f" {self.item_id} | {self.name} | {self.unit} | {self.unit_price}"
+        
             
 class Order(models.Model):
     order_id = models.AutoField(primary_key=True)
-    reference_number = models.CharField(unique=True)
-    table_number = models.IntegerField(null=True)
-    phone_number = models.IntegerField(null=True)
-    restaurant = models.ForeignKey(Restaurant, related_name="orders", on_delete=models.CASCADE)
-    total_amount = models.DecimalField(decimal_places=2, max_digits=10)
+    reference_number = models.CharField(unique=True, max_length=20)
+    table_number = models.IntegerField(null=True, blank=False)
+    phone_number = models.IntegerField(null=True, blank=False)
+    restaurant = models.ForeignKey(Restaurant, related_name="orders", on_delete=models.SET_NULL, null=True, blank=True)
+    total_amount = models.DecimalField(decimal_places=2, max_digits=10, null=True, default=None)
     paid = models.BooleanField(default=False)
+
+    @classmethod
+    def get(cls, order_id):
+        order = cls.objects.filter(order_id=order_id).first()
+        return order or None
+
+    @property
+    def items_ordered(self):
+        return self.ordered_items.all()
+
+    def items_available(self):
+        return self.ordered_items.filter(available=True)
+    
+    def items_unavailable(self):
+        return self.ordered_items.filter(available=False)
+
+    def total(self):
+        if not self.total_amount:
+            self.total_amount = sum(item.total for item in self.items_available())
+        return self.total_amount
+        
+    def save(self, *args, **kwargs):
+        self.total()
+        super().save(*args, **kwargs)
+    
+    @property
+    def is_paid(self):
+        return self.paid
+    
+    def mark_paid(self, value=True):
+        for item in self.items:
+            item.paid = value
+            item.save()
+        self.paid = value
+
+    @classmethod
+    def latest_pending(cls, phone_number=None):
+        """
+        Identifies the customer by the phone number if provided,
+        Aassumes the latest order placed is the valid one.
+        """
+        if phone_number:
+            return cls.objects.filter(phone_number=phone_number, paid=False).order_by('-order_id').first()
+        return cls.objects.filter(paid=False).order_by('-order_id').first()
+
+
+    @classmethod
+    def latest_paid(cls, phone_number):
+        return cls.objects.filter(phone_number=phone_number, paid=True).order_by('-order_id').first()
 
     def __str__(self):
         return f"Order No: {self.order_id} | Ref. No: {self.reference_number} " \
-               f"| Restaurant: {self.restaurant.restaurant_name} | Amount: {self.total_amount}"
+               f"| Restaurant: {self.restaurant.name} | Amount: {self.total_amount}"
 
-    @staticmethod
-    def latest_pending(phone_number):
-        return Order.objects.filter(phone_number=phone_number, paid=False).order_by('-order_id').first()
-
-    @staticmethod
-    def latest_paid(phone_number):
-        return Order.objects.filter(phone_number=phone_number, paid=True).order_by('-order_id').first()
-
-    @property
-    def items(self):
-        return self.ordered_items.all()
-    
 
 class OrderedItem(models.Model):
     ordered_item_id = models.AutoField(primary_key=True)
@@ -63,10 +142,41 @@ class OrderedItem(models.Model):
     total = models.DecimalField(decimal_places=2, max_digits=10, default=0.00)
     paid = models.BooleanField(default=False)
 
+    def is_available(self):
+        return self.item.available
+
+    @classmethod
+    def add(cls, item, order, quantity):
+        if isinstance(item, Item) and isinstance(order, Order):
+            obj = cls.objects.create(item, order, quantity)
+            obj.save()
+
+    @classmethod
+    def set_to_paid(cls, ordered_item_id):
+        if obj := cls.objects.get(ordered_item_id):
+            obj.paid = True     
+            obj.save()
+
+    @classmethod
+    def add_items(cls, ordered_items, order:Order):
+        """can take a single item object or a list of objects"""
+        ordered_items = list(ordered_items)
+        for i in ordered_items:
+            cls.add(item=i['item'], order=order, quantity=i['quantity'])
+
     def save(self, *args, **kwargs):
         if self.item is not None:
             self.total = self.item.item_price * self.quantity
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"Item: {self.item.item_name} | Price: {self.item.item_price} | Quantity: {self.quantity}"
+        return f"Item: {self.item.name} | Price: {self.item.unit_price} | Quantity: {self.quantity}"
+
+
+class ItemImage(models.Model):
+    id = models.AutoField(primary_key=True)
+    item = models.ForeignKey(Item, on_delete=models.SET_NULL, related_name='images', null=True)
+    image_field = models.FileField(upload_to='item_images/') 
+
+
+

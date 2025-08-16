@@ -1,7 +1,30 @@
 from .models import Restaurant, Order, Item, OrderedItem
+from django.core.exceptions import FieldError
+from mpesa.models import Payment
+# from mpesa import mpesa_api
 import random
 import string
 
+def is_existing(obj, data):
+    for k, v in data.items():
+        try:
+            if obj.objects.filter(**{k: v}).exists():
+                return True
+        except FieldError:
+            continue
+    return False
+
+
+def get_form_error(form):
+    errors_dict = {}
+    for field, errors in form.errors.items():
+        errors_dict[f"{field}"] = ', '.join(errors)
+    return errors_dict
+
+
+def send_stk_push(restaurant, order, reference_number):
+    amount = order.total
+    ...
 
 def get_restaurant(restaurant_id):
     restaurant = Restaurant.objects.filter(restaurant_id=restaurant_id).first()
@@ -45,7 +68,7 @@ def get_order(restaurant_id, items):
 
 
 def get_order_context(restaurant, valid_items, invalid_items, table_number):
-    total_amount = sum(item['item_price'] for item in valid_items)
+    total_amount = sum(item['item_total'] for item in valid_items)
     reference_number = make_reference_number()
     invalid_items = invalid_items if len(invalid_items) > 0 else None
     summary = {
@@ -54,7 +77,6 @@ def get_order_context(restaurant, valid_items, invalid_items, table_number):
         'phone_number': '',
         'total_amount': total_amount,
         'restaurant_id': restaurant.restaurant_id,
-
     }
     return {
         'summary': summary, 'valid_items': valid_items, 'invalid_items': invalid_items, 'restaurant': restaurant,
@@ -69,6 +91,9 @@ def get_ordered_items(post_data):
 
 
 def is_successful_payment(reference_number):
+    # paid_order = Payment.get_payment(reference_number=reference_number)
+    # if paid_order.order:
+        # return True
     # This function should check if the payment was successful.
     # For now, we will assume all payments are successful.
     return True
