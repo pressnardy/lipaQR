@@ -39,7 +39,7 @@
                 </div>
                 <div class="input-wrapper">
                     <div class="label">Status:</div>
-                    <div class="status">{{ display_order.paid }}
+                    <div class="status">{% if display_order.paid %}Paid{% endif %}
                         <div class="info-box">Set the order status to paid</div>
                         <form method="POST" action="" class="paid-btn-wrapper">
                             {% csrf_token %}

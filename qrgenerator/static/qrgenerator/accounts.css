@@ -11,10 +11,15 @@
     --info-orange: rgb(236, 155, 4);
     --green: green;
     --light-green: rgb(17, 18, 19);
+    --faded-black: rgb(37, 36, 36);
 }
 
 html {
-    /* height: 100%; */
+    /* max-width: 90.5vw; */
+}
+
+title {
+    text-transform: capitalize;
 }
 
 body {
@@ -22,12 +27,14 @@ body {
     font-family: Arial, sans-serif;
     letter-spacing: 2px;
     font-size: 16px;
-    width: 100vw;
-    min-width: 1000px;
+    /* width: fit-content; */
+    max-width: 98.9vw;
+    
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    height: 100vh;
+    min-height: 100%;
+    /* height: fit-content; */
     
 }
 
@@ -40,7 +47,8 @@ section {
     flex-direction: column;
     justify-content: flex-start;
     height: fit-content;
-    min-width: 100vw;
+    width: 100%;
+    /* min-width: 100vw; */
     box-sizing: border-box;
     margin-bottom: 4px;
     box-sizing: border-box;
@@ -51,26 +59,39 @@ section {
     padding-left: 10px;
     padding-right: 0;
     display: flex;
+    align-items: center;
     width: 100%;
     height: 100%;
-    justify-content: flex-start;
+    justify-content: space-between;
     box-sizing: border-box;
     gap: 10px;
     background: var(--white);
-    
-    
 
 }
+
+.page-title {
+    color: rebeccapurple;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 20px;
+}
+
+/* .logo {
+    width: 32px;
+    height: 32px;
+} */
 
 .header-right {
     display: flex;
     justify-content: flex-end;
-    width: 100%;
+    /* width: 100%; */
 }
 
 .gen-codes  {
     padding: 10px 15px;
-    border-radius: 15px;
+    border-radius: 20px;
     margin-right: 20px;
     /* margin-bottom: 10px; */
     box-sizing: border-box;
@@ -106,14 +127,16 @@ section {
     align-items: flex-start;
     justify-content: flex-start;
     gap: 4px;
-    height: 90%;
-    max-width: 98vw;
+    height: 90vh;
+    /* max-width: 99.5vw; */
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .main-section-left {
     display: flex;
     flex-wrap: nowrap;
-    grid: 2px;
+    gap: 2px;
     /* width: 340px; */
     width: fit-content;
     box-sizing: border-box;
@@ -128,11 +151,13 @@ section {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border: 1px solid rebeccapurple;
+    /* border: 1px solid rebeccapurple; */
     margin-right: 4px;
     padding-right: 10px;
     border-radius: 0 5px 5px 0;
-    
+    padding-top: 10px;
+    /* font-weight: bold; */
+    letter-spacing: normal;
     
 }
 
@@ -140,13 +165,12 @@ section {
     margin-bottom: 20px;
     padding: 10px 0px;
     text-align: left;
-    /* border: 1px solid var(--accent-b); */
-    font-size: 12px;
-    color: rebeccapurple;
+    font-size: 14px;
 }
 
 .logout {
     justify-self: flex-end;
+    height: 10vh;
 }
 
 .menu-elements {
@@ -162,30 +186,36 @@ section {
 
 
 .elements-top {
-    color: var(--green);
+    color: rebeccapurple;
     font-weight: bold;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-between;
     width: 100%;
+    height: 60px;
     /* margin-bottom: 20px; */
     letter-spacing: normal;
-    padding: 5px 5px 10px 5px;
+    padding: 5px 20px;
     box-sizing: border-box;
     border-bottom: 1px solid var(--gray);
 }
 
-.add-btn {
+.elements-title {
+    padding-bottom: 2px;
+    color: var(--faded-black);
     
-    text-transform: capitalize;
+}
+
+a#add-new {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-wrap: nowrap;
     white-space: nowrap;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    border: 1px solid var(--green);
-    background: none;
-    color: var(--green);
-    word-spacing: 4px;
+}
+
+span#new {
+
 }
 
 .plus-sign {
@@ -200,18 +230,28 @@ section {
 
 }
 
+ol.elements-wrapper {
+    margin-top: 0px;
+    /* padding-left: 20px; */
+    box-sizing: border-box;
+}
+
 .element-highlight {
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 4px;
+    justify-content: flex-start;
     white-space: nowrap;
     font-size: 12px;
-    padding:10px;
+    padding:10px 0px 10px 20px;
     box-sizing: border-box;
     border-bottom: 1px solid var(--gray);
     width: 100%;
 }
 
 .bg-light-gray {
-    background: var(--light-background);
+    background: rgb(228, 225, 225);
 }
 
 .bg-white {

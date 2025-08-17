@@ -28,7 +28,7 @@ class Restaurant(models.Model):
     def menu(self):
         return self.items.filter(available=True)
     
-    def items(self):
+    def all_items(self):
         return self.items.all()
 
     def in_menu(self, item_name=None, item_id=None):

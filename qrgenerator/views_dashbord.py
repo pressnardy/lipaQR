@@ -22,7 +22,7 @@ def view_item(request, item_id):
 
 
 def add_item(request):
-    context = {}
+    context = {'items': request.user.restaurant.menu}
     if request.method == 'POST':
         form = AddItemForm(request.POST, request.FILES)
         if form.is_valid():

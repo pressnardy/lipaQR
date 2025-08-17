@@ -69,7 +69,10 @@ def logout_view(request):
 
 # @login_required
 def account(request):
-    return render(request, 'qrgenerator/dashbord.html')
+    if restaurant := request.user.restaurant:
+        context = {'restaurant': restaurant}
+        return render(request, 'qrgenerator/dashbord.html', context)
+    return redirect('qrgenerator:add_restaurant')
 
 
 def add_restaurant(request):

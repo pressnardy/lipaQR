@@ -6,7 +6,7 @@
 <div class="form-wrapper">
     {% if message %} <div class="message-success">{{ message }}</div>{% endif %}
     {% if form.errors %}{{ form.errors }}{% endif %}
-    <div class="form-title"><h3>Add Item</h3></div>
+    <div class="form-title"><h3>Item Details</h3></div>
     <form action="" method="post" enctype="multipart/form-data" class="form-register order-summary max-w-600">
         {% csrf_token %}
         <div class="input-wrapper"><div class="label">NAME</div>
@@ -30,9 +30,8 @@
         <div class="input-wrapper description"><div class="label">DESCRIPTION</div>
             <textarea type="text" class="form-input item-description" id="item-description" name="descripion" placeholder="Shot catchy description"></textarea>
         </div>
-        <br>
-        <br>
-        <div class="input-wrapper">
+        <div class="add-btns-wrapper">
+            <div id="cancel">Cancel</div>
             <button type="submit" class="button-save" id="button-save">Save</button>
         </div>
     </form>
