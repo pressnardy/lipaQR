@@ -1,0 +1,22 @@
+
+@media screen and (max-width: 500px) {
+    .tagline {
+        padding: 0;
+    }
+    .tagline-heading {
+        font-size: 40px;
+        padding-right: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin-top: 40px;
+        
+    }
+    .tagline-body {
+        width: 100%;
+        white-space: wrap;
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
+}

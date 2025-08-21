@@ -1,6 +1,7 @@
 
 function validate_tables_input(inputId) {
     const input = document.getElementById(inputId);
+    if(!input){return}
     input.addEventListener('input', () => {
         const value = input.value;
         const isValid = /^[1-9]\d*$/.test(value);

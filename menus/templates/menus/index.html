@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'qrgenerator/accounts.css' %}" rel="stylesheet">
+    <link href="{% static 'menus/index.css' %}" rel="stylesheet">
+    <link href="{% static 'menus/tagline.css' %}" rel="stylesheet">
+    <link href="{% static 'menus/responsive.css' %}" rel="stylesheet">
+    <title>Lipa GR</title>
+</head>
+<body>
+    <section class="page-header np">
+        <div class="header-top">
+            <div class="page-title">
+                <div class="logo">
+                    <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="2" y="2" width="28" height="28" fill="rebeccapurple" />
+                        <rect x="7" y="7" width="18" height="18" fill="white" />
+                        <rect x="11" y="11" width="10" height="10" fill="rebeccapurple" />
+                    </svg>
+                </div>
+                <div>
+                <span id="lipa">Lipa</span> <span id="q">Q</span><span>R</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <a href="{% url 'qrgenerator:get_qrs' %}">
+                    <div class="gen-codes">Create QRs</div>
+                </a>
+            </div>
+        </div>
+    </section>
+    <section class="tagline">
+        <div class="tagline-wrapper">
+            <div class="tagline-heading">
+                <div class="tagline-heading-top">QR code menus</div>
+                <div class="tagline-heading-bottom">
+                <span class="for">for</span> 
+                <span class="restaurants">Restaurants</span>
+                </div>
+            </div>
+            <div class="tagline-body">
+                Supercharge your services with QR code menus
+            </div>
+        </div>
+    </section>
+    <section class="menu-images-section flex-cc">
+        <div class="menu-images">
+            <div class="menus-tagline">
+                <h1>Dynamic Digital Menus</h1>
+                <div class="menus-body">
+                    Digitize your menus with QR codes
+                </div>
+            </div>
+            <div class="menu-image-wrapper">
+                <img src="{% static 'menus/screenshots/pay_order.PNG' %}">
+            </div>
+            <!-- <div class="menu-image-wrapper">
+                <img src="{% static 'menus/screenshots/pay_order.PNG' %}">
+            </div> -->
+        </div>
+        
+    </section>
+    <section class="section-qrs flex-cc">
+        <div class="qr-codes maxw-600">
+            <div class="qr-codes-tagline">
+                Unlimted Downloads
+            </div>
+            <div class="qr-img-wrapper">
+                <img src="{% static 'menus/screenshots/qr_codes.PNG' %}">
+            </div>
+        </div>
+    </section>
+    <section class="dashbord">
+        <div class="dashbord-wrapper flex-cc">
+        <div class="text-wrapper">          
+        <div class="dashbord-tagline">Intuitive Dashbords</div>
+        <div class="dashbord-feature">
+                <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" 
+                xmlns="http://www.w3.org/2000/svg" stroke="#663399" stroke-width="0.36"
+                transform="rotate(0)">
+                <path d="M9.39862 4.32752C9.69152 4.03463 10.1664 4.03463 10.4593 4.32752L16.8232 10.6915C17.5067 11.3749 17.5067 12.4829 16.8232 13.1664L10.4593 19.5303C10.1664 19.8232 9.69152 19.8232 9.39863 19.5303C9.10573 19.2374 9.10573 18.7625 9.39863 18.4697L15.7626 12.1057C15.8602 12.0081 15.8602 11.8498 15.7626 11.7521L9.39863 5.38818C9.10573 5.09529 9.10573 4.62041 9.39862 4.32752Z" fill="rebeccapurple"/>
+            </svg>
+            
+            Track incoming orders in realtime
+        </div>
+        <div class="dashbord-feature">
+                <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" 
+                xmlns="http://www.w3.org/2000/svg" stroke="#663399" stroke-width="0.36"
+                transform="rotate(0)">
+                <path d="M9.39862 4.32752C9.69152 4.03463 10.1664 4.03463 10.4593 4.32752L16.8232 10.6915C17.5067 11.3749 17.5067 12.4829 16.8232 13.1664L10.4593 19.5303C10.1664 19.8232 9.69152 19.8232 9.39863 19.5303C9.10573 19.2374 9.10573 18.7625 9.39863 18.4697L15.7626 12.1057C15.8602 12.0081 15.8602 11.8498 15.7626 11.7521L9.39863 5.38818C9.10573 5.09529 9.10573 4.62041 9.39862 4.32752Z" fill="rebeccapurple"/>
+            </svg>
+            
+            Realtime Statistics
+        </div>
+        <div class="dashbord-feature">
+                <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" 
+                xmlns="http://www.w3.org/2000/svg" stroke="#663399" stroke-width="0.36"
+                transform="rotate(0)">
+                <path d="M9.39862 4.32752C9.69152 4.03463 10.1664 4.03463 10.4593 4.32752L16.8232 10.6915C17.5067 11.3749 17.5067 12.4829 16.8232 13.1664L10.4593 19.5303C10.1664 19.8232 9.69152 19.8232 9.39863 19.5303C9.10573 19.2374 9.10573 18.7625 9.39863 18.4697L15.7626 12.1057C15.8602 12.0081 15.8602 11.8498 15.7626 11.7521L9.39863 5.38818C9.10573 5.09529 9.10573 4.62041 9.39862 4.32752Z" fill="rebeccapurple"/>
+            </svg>
+            
+            Payments Tracker
+        </div>
+        </div>
+        <div class="dashbord-img-wrapper maxw-600">
+            <img class="dashbord-screenshot" src="{% static 'menus/screenshots/dashbord.PNG' %}" alt="">
+        </div>
+        </div> 
+    </section>
+    <footer>
+        <div class="footer-wrapper">
+        <div class="footer-left">
+            <div class="about-us">About Us</div>
+            <div class="about-us-p">Lipa QR is a softaware solution for restaurants and eateries wishing to modernize their service delivery using online QR menus and order tracking
+            </div>   
+            </div>
+        <div class="footer-right">
+            <div class="contacts">Contacts</div>
+            <div class="phone-number"><a href="tel:0743433795">+254743433795</a></div>
+        </div>
+        </div>
+    </footer>
+</body>
+</html>

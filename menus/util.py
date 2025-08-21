@@ -24,7 +24,9 @@ def get_form_error(form):
 
 def send_stk_push(restaurant, order, reference_number):
     amount = order.total
-    ...
+    till_number = restaurant.till_number
+    phone_number = order.phone_number
+    # mpesa_api.send_stk_push()
 
 def get_restaurant(restaurant_id):
     restaurant = Restaurant.objects.filter(restaurant_id=restaurant_id).first()
@@ -58,9 +60,9 @@ def get_order(restaurant_id, items):
 
     for i in items:
         if item := available_items.filter(item_id=i['item_id']).first():
-            i['item_price'] = item.item_price
-            i['item_name'] = item.item_name
-            i['item_total'] = float(item.item_price) * float(i['item_quantity'])
+            i['item_price'] = item.unit_price
+            i['item_name'] = item.name
+            i['item_total'] = float(item.unit_price) * float(i['item_quantity'])
             valid_items.append(i)
         else:
             invalid_items.append(i)
@@ -86,7 +88,8 @@ def get_order_context(restaurant, valid_items, invalid_items, table_number):
 
 def get_ordered_items(post_data):
     post_data_list = [[k, v] for k, v in post_data.items()]
-    items = [{'item_id': i[0], 'item_quantity': int(i[1])} for i in post_data_list[6:]]
+    print(post_data_list)
+    items = [{'item_id': i[0], 'item_quantity': int(i[1])} for i in post_data_list[6:-1]]
     return items
 
 
@@ -105,7 +108,7 @@ def save_to_pending(items, order):
         quantity = i['item_quantity']
         ordered_item = OrderedItem(item=item, order=order, quantity=quantity)
         ordered_item.save()
-
+        order.save()
 
 def set_to_paid(items):
     for item in items:

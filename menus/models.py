@@ -13,6 +13,16 @@ class LowercaseTextField(models.CharField):
             value = str(value)
         return value.lower().strip()
 
+class PhoneNumber(models.CharField):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def pre_save(self, model_instance, add):
+        value = getattr(model_instance, self.attname)
+        if value is None:
+            return value
+        return f"0{value[-9:]}"
+
 
 # Create your models here.
 class Restaurant(models.Model):
@@ -20,7 +30,7 @@ class Restaurant(models.Model):
     name = LowercaseTextField(max_length=100, null=True, blank=False)
     location = LowercaseTextField(max_length=50, null=True, blank=False)
     email = models.EmailField(unique=True, null=True, blank=False)
-    phone_number = models.CharField(max_length=20, null=True, blank=False)
+    phone_number = PhoneNumber(max_length=15, null=True, blank=False)
     till_number = models.IntegerField(null=True, blank=False)
     created_by = models.OneToOneField(User, on_delete=models.SET_NULL, null=True)
 
@@ -40,6 +50,12 @@ class Restaurant(models.Model):
                 return True
         return False
         
+    def new_orders(self):
+        paid = self.orders.filter(paid=True, new=True).order_by('-order_id')
+        pending = self.orders.filter(paid=False, new=True).order_by('-order_id')
+        return {'paid': paid, 'pending': pending}
+    
+
     def paid_orders(self, quantity=-1):
         return self.orders.filter(paid=True).order_by('-order_id')[:quantity]
     
@@ -49,6 +65,13 @@ class Restaurant(models.Model):
     def items_unavailable(self):
         return self.items.filter(available=False)
     
+    @classmethod
+    def update_phones(cls):
+        rests = cls.objects.all()
+        for i in rests:
+            i.phone_number = f"0{i.phone_number[-9:]}"
+            i.save()
+
     def __str__(self):
         return f"{self.name}: {self.location}"
 
@@ -67,6 +90,12 @@ class Item(models.Model):
     def get(cls, item_id):
         return cls.objects.filter(item_id=item_id).first()
         
+    @classmethod
+    def is_available(cls, item_id):
+        if item := cls.get(item_id):
+            return item.available
+        return False
+
     def __str__(self):
         return f" {self.item_id} | {self.name} | {self.unit} | {self.unit_price}"
         
@@ -75,32 +104,41 @@ class Order(models.Model):
     order_id = models.AutoField(primary_key=True)
     reference_number = models.CharField(unique=True, max_length=20)
     table_number = models.IntegerField(null=True, blank=False)
-    phone_number = models.IntegerField(null=True, blank=False)
+    phone_number = PhoneNumber(max_length=15, null=True, blank=False)
     restaurant = models.ForeignKey(Restaurant, related_name="orders", on_delete=models.SET_NULL, null=True, blank=True)
     total_amount = models.DecimalField(decimal_places=2, max_digits=10, null=True, default=None)
     paid = models.BooleanField(default=False)
+    new = models.BooleanField(default=True)
 
     @classmethod
-    def get(cls, order_id):
-        order = cls.objects.filter(order_id=order_id).first()
-        return order or None
-
+    def get(cls, unique_value):
+        if isinstance(unique_value, int):
+            if order := cls.objects.filter(order_id=unique_value).first():
+                return order
+        if order := cls.objects.filter(reference_number=unique_value).first():
+            return order
+        return None
+    
     @property
     def items_ordered(self):
         return self.ordered_items.all()
 
     def items_available(self):
-        return self.ordered_items.filter(available=True)
-    
+        # try:
+        return [item for item in self.ordered_items.all() if item.is_available]
+        # except ValueError:
+        #     pass
+
     def items_unavailable(self):
-        return self.ordered_items.filter(available=False)
+        return [item for item in self.ordered_items.all() if not item.is_available]
 
     def total(self):
-        if not self.total_amount:
+        if self.items_available():
             self.total_amount = sum(item.total for item in self.items_available())
         return self.total_amount
         
     def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
         self.total()
         super().save(*args, **kwargs)
     
@@ -108,11 +146,12 @@ class Order(models.Model):
     def is_paid(self):
         return self.paid
     
-    def mark_paid(self, value=True):
+    def mark_paid(self):
         for item in self.items:
-            item.paid = value
+            item.paid = True
             item.save()
-        self.paid = value
+        self.paid = True
+        self.save()
 
     @classmethod
     def latest_pending(cls, phone_number=None):
@@ -129,6 +168,13 @@ class Order(models.Model):
     def latest_paid(cls, phone_number):
         return cls.objects.filter(phone_number=phone_number, paid=True).order_by('-order_id').first()
 
+    @classmethod
+    def update_phones(cls):
+        orders = cls.objects.all()
+        for i in orders:
+            i.phone_number = f"0{i.phone_number[-9:]}"
+            i.save()
+            
     def __str__(self):
         return f"Order No: {self.order_id} | Ref. No: {self.reference_number} " \
                f"| Restaurant: {self.restaurant.name} | Amount: {self.total_amount}"
@@ -166,8 +212,10 @@ class OrderedItem(models.Model):
 
     def save(self, *args, **kwargs):
         if self.item is not None:
-            self.total = self.item.item_price * self.quantity
-        super().save(*args, **kwargs)
+            self.total = self.item.unit_price * self.quantity
+            super().save(*args, **kwargs)
+        else:
+            raise TypeError('ITEM CANNOT BE NONE')
 
     def __str__(self):
         return f"Item: {self.item.name} | Price: {self.item.unit_price} | Quantity: {self.quantity}"

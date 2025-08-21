@@ -18,10 +18,10 @@ class MenuForm(forms.Form):
 class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
-        fields = ['reference_number', 'phone_number', 'table_number', 'total_amount']
+        fields = ['reference_number', 'phone_number', 'table_number',]
         widgets = {
             'reference_number': forms.TextInput(attrs={'disabled': True, 'name': 'reference_number'}),
-            'total_amount': forms.NumberInput(attrs={'disabled': True, 'name': 'total_amount'}),
+            # 'total_amount': forms.NumberInput(attrs={'disabled': True, 'name': 'total_amount'}),
             'table_number': forms.NumberInput(attrs={'disabled': True, 'name': 'table_number'}),
             'phone_number': forms.TextInput(attrs={'required': True, 'name': 'phone_number'}),
         }

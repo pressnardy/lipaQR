@@ -9,7 +9,6 @@
     --brown: #862603;
     --gray: rgb(163, 163, 163);
     --info-orange: rgb(236, 155, 4);
-    --green: green;
     --light-green: rgb(17, 18, 19);
 }
 
@@ -17,7 +16,7 @@ body {
     font-family: Arial, sans-serif;
     letter-spacing: 2px;
     font-size: 16px;
-    width: 100vw;
+    width: 100%;
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -29,20 +28,20 @@ body {
     border-radius: 5px;
     height: 100%;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     gap: 10px;
-    /* min-width: 580px; */
-    min-height: fit-content;
+    overflow-y: auto;
+    overflow-x: auto;
 
 }
 
 #search-wrapper {
     width: 100%;
     height: 80px;
-    padding: 0 20px;
+    padding: 10px 20px;
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -112,6 +111,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    letter-spacing: normal;
     
 }
 
@@ -164,14 +164,16 @@ body {
 
 .mark-paid {
     font-size: 10px;
-    padding: 10px;
+    padding: 10px 15px;
     text-align: left;
     text-transform: uppercase;
-    background: rebeccapurple;
-    border: none;
-    color: var(--white);
+    /* background: rebeccapurple; */
+    border: 2px solid rebeccapurple;
+    color: rebeccapurple;
+    font-weight: bold;
+    background: white;
     cursor: pointer;
-    border-radius: 15px;
+    border-radius: 20px;
     
 }
 

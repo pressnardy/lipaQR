@@ -10,10 +10,13 @@
     <link rel="stylesheet" href="{% static 'qrgenerator/accounts.css' %}">
     <link rel="stylesheet" href="{% static 'qrgenerator/workspace.css' %}">
     <link rel="stylesheet" href="{% static 'qrgenerator/stats.css' %}">
+    <link rel="stylesheet" href="{% static 'qrgenerator/print.css' %}">
+    <script defer src="{% static 'qrgenerator/scripts/incomings.js' %}"></script>
     <script defer src="{% static 'qrgenerator/scripts/validations.js' %}"></script>
 </head>
 <body>
-<section class="page-header">
+<div style="display: none;"><a id="incoming-url" href="{% url 'qrgenerator:new_orders' %}"></a></div>
+<section class="page-header np">
         <div class="header-top">
             <div class="page-title">
                 <div class="logo">
@@ -30,27 +33,37 @@
             <div class="restaurant-name">Moria Juja</div>
             <div class="header-right">
                 <a href="{% url 'qrgenerator:get_qrs' %}">
-                    <div class="gen-codes">Generate</div>
+                    <div class="gen-codes">Generate QRs</div>
                 </a>
             </div>
         </div>
 </section>
 <section class="main-section">
-    <div class="main-section-left bg-light-gray">
+    <div class="main-section-left bg-light-gray np">
         <div class="menu-left bg-white">
             <div>
+                {% block menu %}
                 <div class="menu-left-item">
                     <a href="{% url 'qrgenerator:menu' %}">Menu</a>
                 </div>
+                {% endblock %}
+                {% block pending %}
                 <div class="menu-left-item">
-                    <a href="{% url 'qrgenerator:pending' %}">Pending</a>
+                    <a href="{% url 'qrgenerator:pending' %}">Pending
+                        <span id="incoming-pending" class="incoming">10</span>
+                    </a>
                 </div>
+                {% endblock %}
+                {% block paid %}
                 <div class="menu-left-item">
-                    <a href="{% url 'qrgenerator:paid' %}">Paid</a>
+                    <a href="{% url 'qrgenerator:paid' %}">Paid
+                        <span id="incoming-paid" class="incoming">3</span>
+                    </a>
                 </div>
+                {% endblock %}
             </div>
             <div class="menu-left-item">
-                <div class="logout">
+                <div class="dash-logout">
                     <a href="{% url 'qrgenerator:logout' %}"><div>Log Out</div></a>
                 </div>
             </div>
@@ -59,7 +72,7 @@
         <div class="menu-elements bg-white">
             <div class="elements-top">
                 <div class="elements-title">Paid orders</div>
-                <button class="add-btn"><span class="plus-sign">+</span></button>
+                <button class="add-btn"></button>
             </div>
             <div class="elements-wrapper">
                 <div class="element-highlight">00100001: KES: 40000.00 </div>
@@ -70,7 +83,7 @@
         {% endblock %}
     </div>
     <div class="workspace">
-        <div id="search-wrapper">
+        <div id="search-wrapper" class="np">
             <form action="" method="post" id="search-form">
                 <div id="query-wrapper">
                     <input type="search" name="query" id="input-search" required placeholder="Enter order id or ref no. or phone no.">
@@ -129,29 +142,56 @@
         </div>
         {% endblock %}
     </div>
-    <div class="stats">
+    <div class="stats np">
         <div class="stats-item">
             <div class="stats-item-title">Today's Sales</div>
             <div class="stat-details">
-                <div class="orders-sold">Orders: 1234</div>
-                <div class="total-value">Total: KES: 40000</div>
-                <div class="average">Popular: chipo</div>
+                <div class="orders-sold stat-wrapper margin-small">
+                    <span class="bold">Orders</span>
+                    <span class="stat-value">1234</span>
+                </div>
+                <div class="total-value stat-wrapper margin-small">
+                    <span class="bold faded-black">Total KES</span>
+                    <span class="stat-value">40000</span>
+                    </div>
+                <div class="average stat-wrapper margin-small">
+                    <span class="bold faded-black">Popular</span>
+                    <span class="stat-value">Fries</span>
+                </div>
             </div>
         </div>
         <div class="stats-item">
             <div class="stats-item-title">This Week</div>
             <div class="stat-details">
-                <div class="orders-sold">Orders: 1234</div>
-                <div class="total-value">Total: KES: 40000</div>
-                <div class="average">Popularm: chipo</div>
+                <div class="orders-sold margin-small">
+                    <span class="bold">Orders</span>
+                    <span class="stat-value">1234</span>
+                </div>
+                <div class="total-value margin-small">
+                    <span class="bold faded-black">Total KES</span>
+                    <span class="stat-value">40000</span>
+                    </div>
+                <div class="average margin-small">
+                    <span class="bold faded-black">Popular</span>
+                    <span class="stat-value">Fries</span>
+                </div>
             </div>
         </div>
         <div class="stats-item">
             <div class="stats-item-title">This Month</div>
             <div class="stat-details">
-                <div class="orders-sold"><span class="bold">Orders:</span>1234</div>
-                <div class="total-value"><span class="bold">Total:</span>KES: 40000</div>
-                <div class="average"><span class="bold">Popular:</span>chipo</div>
+                <div class="orders-sold margin-small">
+                    <span class="bold">Orders</span>
+                    <span class="stat-value">1234</span>
+                </div>
+                <div class="total-value margin-small">
+                    <span class="bold faded-black">Total KES</span>
+                    <span class="stat-value">40000</span>
+                    </div>
+                <div class="average margin-small">
+                    <span class="bold faded-black">Popular</span>
+                    <span class="stat-value">Fries</span>
+                </div>
             </div>
         </div>
     </div>

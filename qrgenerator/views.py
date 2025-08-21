@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .import generator
+from django.urls import reverse
 from menus.models import Restaurant
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
@@ -9,12 +10,13 @@ from qrgenerator.forms import RegistrationForm, LoginForm, AddRestaurantForm, Ad
 from menus import util
 
 def index(request):
-    return render(request, 'qrgenerator/index.html')
+    return render(request, 'menus/index.html')
     
 
 def order(request):
     return render(request, 'qrgenerator/order.html')
 
+@login_required(login_url='qrgenerator:login')
 def get_qr_codes(request):
     context = {}
     items = request.user.restaurant.items.all().order_by('-item_id')
@@ -86,4 +88,6 @@ def add_restaurant(request):
     return render(request, 'qrgenerator/add_restaurant.html')
 
 
-    
+def login_tester(request, username='pressnardy@gmail.com', password='zade12345'):
+    user = authenticate(request, username=username, password=password)
+    login(request, user)

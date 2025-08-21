@@ -23,5 +23,7 @@ urlpatterns = [
     path('pending/', views_dashbord.pending_orders, name='pending'),
     path('pending/<int:order_id>/', views_dashbord.pending_orders, name='pending'),
     path('qr_images/', views.get_qr_codes, name='get_qrs'),
+    path('new_orders/', views_dashbord.new_orders, name='new_orders'),
+    path('mark_paid/', views_dashbord.mark_paid, name='mark_paid'),
 ]
 

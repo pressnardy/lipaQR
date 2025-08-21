@@ -4,58 +4,88 @@
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'qrgenerator/accounts.css' %}" rel="stylesheet">
     <link href="{% static 'menus/index.css' %}" rel="stylesheet">
+    <link href="{% static 'menus/order.css' %}" rel="stylesheet">
     <title>{{ restaurant}}</title>
     <script defer src="{% static 'scripts/index.js' %}"></script>
 </head>
 <body>
-    <section class="restaurant-name flex-center">
-        <div class="restaurant-name">{{ restaurant.restaurant_name }}</div>
-        <div class="restaurant-name">{{ restaurant.restaurant_location }}</div>
+    <section class="page-header np">
+        <div class="header-top">
+            <div class="page-title">
+                <div class="logo">
+                    <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="2" y="2" width="28" height="28" fill="rebeccapurple" />
+                        <rect x="7" y="7" width="18" height="18" fill="white" />
+                        <rect x="11" y="11" width="10" height="10" fill="rebeccapurple" />
+                    </svg>
+                </div>
+                <div>
+                <span id="lipa">Lipa</span> <span id="q">Q</span><span>R</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <a href="{% url 'qrgenerator:get_qrs' %}">
+                    <div class="gen-codes">Create QRs</div>
+                </a>
+            </div>
+        </div>
     </section>
-    <section class="flex-center">
-        <div class="table light-background">Table <span class="table-number">{{ table_number }}</span></div>
-    </section>
-    <section class="restaurant-menu flex-center">
-        <form action="{% url 'menus:get_order' restaurant.restaurant_id table_number %}" class="menu-form light-background" method="post">
+    <section class="flex-center flex-column restaurant-details">
+        <div class="flex-center">
+            <div class="restaurant-name">{{ restaurant.name }}</div>
+            <div class="restaurant-name">{{ restaurant.location }}</div>
+        </div>
+        <div class="table">TABLE <span class="">{{ table_number }}</span></div>
+    </section>        
+    <section class="restaurant-menu">
+        {% block main_section %}
+        <form action="{% url 'menus:get_order' restaurant.restaurant_id table_number %}" class="menu-form" method="post">
             {% csrf_token %}
             <div style="display: none;">
                 <input type="text" id="restaurant-id" name="restaurant_id" value="{{ restaurant.restaurant_id }}">
                 <input type="number" id="table-number" name="table_number" value="{{ table_number }}">    
             </div>
             {% for item in menu %}
-            <div class="menu-item order-item" id="item-{{ item.item_id }}">
-                <div class="height-0"><span class="onborder-name">{{ item.item_name}}</span></div>
+            <div class="menu-item" id="item-{{ item.item_id }}">
+                <div class="height-0"><span class="onborder-name">{{ item.name}}</span></div>
                 <div class="item-image-container">
-                    <img src="{{ item.item_image.url }}" alt="Image of {{ item.item_name }}" class="item-image">
+                    <img src="{{ item.image.url }}" alt="Image of {{ item.name }}" class="item-image">
                 </div>
-                <br>
-                <div class="item-details">
-                    <div class="item-price"><span class="unit">unit @ </span>KES:
-                        <span id="item-{{ item.item_id }}-price">{{ item.item_price }}</span>
-                    </div>
-                </div>
-                <div class="item-calcs">
-                    <div class="item-quantity">
-                        <div class="totals">Total:
-                            <span class="total" id="item-{{ item.item_id }}-total">0</span>
+                <div class="item-text">
+                    <div class="item-details">
+                        <div class="item-price"><span class="unit">{{ item.unit }} @</span>KES:
+                            <span id="item-{{ item.item_id }}-price"> {{ item.unit_price }}</span>
                         </div>
-                        <button class="quantity-button reduce-button" type="button">-</button>
-                        <input id="item-{{ item.item_id }}-quantity" type="number" name="{{ item.item_id }}" placeholder="0" value="0" class="quantity-input" min="0" readonly>
-                        <button class="quantity-button add-button" type="button">+</button>
+                    </div>
+                    <div class="item-calcs">
+                        <div class="item-quantity">
+                            <div class="totals">Total:
+                                <span class="item-total" id="item-{{ item.item_id }}-total">0</span>
+                            </div>
+                            <div class="quantity-wrapper">
+                                <button class="quantity-button reduce-button" type="button">-</button>
+                                <input id="item-{{ item.item_id }}-quantity" type="number" name="{{ item.item_id }}" placeholder="0" value="0" class="quantity-input" min="0" readonly>
+                                <button class="quantity-button add-button" type="button">+</button>
+                            </div>    
+                        </div>
                     </div>
                 </div>
-                <br>
             </div>
-            <br>
             <br>
             {% endfor %}
-            <br>
-            <div>
-                Total: <span id="menu-total"></span>
-            </div>
-            <input type="submit" name="Place-Order" value="Place Order" class="submit-button">
+            <div class=preview>
+                <div>
+                    TOTAL: <span id="menu-total">KES: 4000.00</span>
+                </div>
+                <div>
+                    <span id="cancel">Cancel</span>
+                    <input type="submit" name="Place-Order" value="Place Order" class="submit-button">
+                </div> 
+            </div>   
         </form>
+        {% endblock %}
     </div>
 </body>
 </html>
