@@ -1,6 +1,9 @@
 import os
 import qrcode
 from PIL import Image, ImageDraw, ImageFont
+from dotenv import load_dotenv
+
+load_dotenv()
 
 TEXT_COLOR = "#661DAF"
 
@@ -59,7 +62,7 @@ def generate_qr_code(url, text, font_size=100, output_path='qr_code.png'):
 
 def gen_images(tables, restaurant_id):
     directory = create_folder(f'qrgenerator/static/qrgenerator/{restaurant_id}')
-    url = 'https://www.lipaqr.com/menus'
+    url = os.environ.get("BASE_QR_URL")
     
     for i in range(int(tables)):
         table_number = str(i + 1).zfill(2)

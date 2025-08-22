@@ -8,6 +8,7 @@
     <link href="{% static 'qrgenerator/accounts.css' %}" rel="stylesheet">
     <link href="{% static 'menus/index.css' %}" rel="stylesheet">
     <link href="{% static 'menus/order.css' %}" rel="stylesheet">
+    <link href="{% static 'menus/order_mobile.css' %}" rel="stylesheet">
     <title>{{ restaurant}}</title>
     <script defer src="{% static 'scripts/index.js' %}"></script>
 </head>
@@ -34,7 +35,7 @@
         </div>
     </section>
     <section class="flex-center flex-column restaurant-details">
-        <div class="flex-center">
+        <div class="flex-center title-adjust">
             <div class="restaurant-name">{{ restaurant.name }}</div>
             <div class="restaurant-name">{{ restaurant.location }}</div>
         </div>

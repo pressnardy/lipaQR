@@ -95,3 +95,23 @@ a {
     text-decoration: none;
     color: inherit;
 }
+
+
+@media screen and (max-width: 730px) {
+    .page-heading {
+        flex-direction: column;
+        gap: 20px;
+        min-height: fit-content;
+        box-sizing: border-box;
+        padding-bottom: 20px;
+    }
+
+    .page-title {
+        width: 100%;
+    }
+
+    nav {
+        min-width: fit-content;
+        box-sizing: border-box;
+    }
+}

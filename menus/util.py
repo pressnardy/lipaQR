@@ -4,6 +4,17 @@ from mpesa.models import Payment
 # from mpesa import mpesa_api
 import random
 import string
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+def get_menus_url():
+    """returns the base url used to create QRs"""
+    # remove the trailing / in base url
+    # before passing it
+    return os.environ.get('BASE_QR_URL')
+    
 
 def is_existing(obj, data):
     for k, v in data.items():
