@@ -50,14 +50,14 @@
                 {% block pending %}
                 <div class="menu-left-item">
                     <a href="{% url 'qrgenerator:pending' %}">Pending
-                        <span id="incoming-pending" class="incoming">10</span>
+                        <span id="incoming-pending" class="incoming">0</span>
                     </a>
                 </div>
                 {% endblock %}
                 {% block paid %}
                 <div class="menu-left-item">
                     <a href="{% url 'qrgenerator:paid' %}">Paid
-                        <span id="incoming-paid" class="incoming">3</span>
+                        <span id="incoming-paid" class="incoming">0</span>
                     </a>
                 </div>
                 {% endblock %}
@@ -69,7 +69,7 @@
             </div>
         </div>
         {% block menu_elements %}
-        <div class="menu-elements bg-white">
+        <!-- <div class="menu-elements bg-white">
             <div class="elements-top">
                 <div class="elements-title">Paid orders</div>
                 <button class="add-btn"></button>
@@ -79,7 +79,7 @@
                 <div class="element-highlight">00100001: KES: 40000.00 </div>
                 <div class="element-highlight">00100001: KES: 40000.00 </div>
             </div>
-        </div>
+        </div> -->
         {% endblock %}
     </div>
     <div class="workspace">

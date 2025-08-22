@@ -3,7 +3,7 @@
 {% block paid %}
 <div class="menu-left-item active-tab">
     <a href="{% url 'qrgenerator:paid' %}">Paid
-        <span id="incoming-paid" class="incoming">3</span>
+        <span id="incoming-paid" class="incoming">0</span>
     </a>
 </div>
 {% endblock %}
@@ -81,6 +81,8 @@
                 {% endfor %}
             </ol>
             </div>
+            {% else %}
+            <p>No Orders at the moment</p>
             {% endif %}
         </div>
     <!-- </div> -->

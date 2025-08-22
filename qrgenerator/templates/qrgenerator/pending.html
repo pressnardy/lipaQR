@@ -23,6 +23,7 @@
         </div>
         </a>
         {% endfor %}
+        
         {% endif %}
     </div>
 </div>
@@ -34,8 +35,8 @@
     <div class="form-wrapper">
         <div class="form-title"><h3>Order Details</h3></div>
         <div class="order-summary">
+            {% if display_order %}
             <div class="width-250">
-                {% if display_order %}
                 <div class="input-wrapper">
                     <div class="label">Reference no:</div>
                     <div class="form-input"> {{ display_order.reference_number }} </div>
@@ -60,11 +61,9 @@
                     </div>
                 </div>
                 <br>
-                {% endif %}
             </div>
             <div class="width-250 padding-left-10">
             <div class="label items-title">Items</div>
-            {% if display_order %}
             <ol>
                 {% for item in display_order.items_ordered %}
                 <li>
@@ -75,8 +74,10 @@
                 </li>
                 {% endfor %}
             </ol>
-            {% endif %}
             </div>
+            {% else %}
+            <p>No Orders at the moment</p>
+            {% endif %}
         </div>
     <!-- </div> -->
 </div>

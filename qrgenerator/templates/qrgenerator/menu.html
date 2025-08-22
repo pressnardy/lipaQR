@@ -31,14 +31,15 @@
             </div>
         </a>
         {% endfor %}
+        {% endif %}
     </div>
-    {% endif %}
 </div>
 
 {% endblock %}
 
 {% block workspace %}
 <div class="form-wrapper">
+{% if display_item %}
 <div class="form-title"><h3>Item Details
     <a href="{% url 'qrgenerator:edit_item' display_item.item_id %}" class="svg-edit">
     <svg width="16px" height="16px" viewBox="0 0 24 24" id="_24x24_On_Light_Edit" data-name="24x24/On Light/Edit" xmlns="http://www.w3.org/2000/svg">
@@ -46,7 +47,21 @@
         <path stroke="currentColor" fill="none" id="Shape" d="M.75,17.5A.751.751,0,0,1,0,16.75V12.569a.755.755,0,0,1,.22-.53L11.461.8a2.72,2.72,0,0,1,3.848,0L16.7,2.191a2.72,2.72,0,0,1,0,3.848L5.462,17.28a.747.747,0,0,1-.531.22ZM1.5,12.879V16h3.12l7.91-7.91L9.41,4.97ZM13.591,7.03l2.051-2.051a1.223,1.223,0,0,0,0-1.727L14.249,1.858a1.222,1.222,0,0,0-1.727,0L10.47,3.91Z" transform="translate(3.25 3.25)" fill="#141124"/>
     </svg><span class="text-edit">Edit</span>
     </a>
-</h3></div>
+</h3>
+</div>
+{% else %}
+<div class="elements-top">
+    <a href="{% url 'qrgenerator:add_item' %}" id="add-new">
+        <svg xmlns="http://www.w3.org/2000/svg" 
+            id="compose-medium" fill="currentColor" aria-hidden="true" 
+            data-supported-dps="24x24" viewBox="0 0 24 24" data-token-id="96" 
+            width="24" height="24" class="compose" aria-label="" style="width: 24px; min-width: 24px; height: 24px; min-height: 24px;">
+            <path d="M19 12h2v6a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3h6v2H6a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1zm4-8a2.9 2.9 0 0 1-.87 2l-8.94 9L7 17l2-6.14 9-9A3 3 0 0 1 23 4m-4 2.35L17.64 5l-7.22 7.22 1.35 1.34z"></path>
+        </svg>
+        <span id="new">Add Items</span>
+    </a>
+</div>
+{% endif %}
 {% if display_item %}
 <div class="form-register order-summary max-w-600">
     <div class="input-wrapper"><div class="label">NAME</div>

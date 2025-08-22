@@ -1,5 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
+from dotenv import load_dotenv
+
+
+load_dotenv()
 
 class LowercaseTextField(models.CharField):
     def __init__(self, *args, **kwargs):
@@ -177,7 +181,7 @@ class Order(models.Model):
             
     def __str__(self):
         return f"Order No: {self.order_id} | Ref. No: {self.reference_number} " \
-               f"| Restaurant: {self.restaurant.name} | Amount: {self.total_amount}"
+               f"| Amount: {self.total_amount}"
 
 
 class OrderedItem(models.Model):
