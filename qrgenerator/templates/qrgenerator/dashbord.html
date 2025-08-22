@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{% static 'qrgenerator/workspace.css' %}">
     <link rel="stylesheet" href="{% static 'qrgenerator/stats.css' %}">
     <link rel="stylesheet" href="{% static 'qrgenerator/print.css' %}">
+        <link rel="stylesheet" href="{% static 'qrgenerator/dashbord_mobile.css' %}">
     <script defer src="{% static 'qrgenerator/scripts/incomings.js' %}"></script>
     <script defer src="{% static 'qrgenerator/scripts/validations.js' %}"></script>
 </head>
@@ -30,7 +31,11 @@
                 <span id="lipa">Lipa</span> <span id="q">Q</span><span>R</span>
                 </div>
             </div>
-            <div class="restaurant-name">Moria Juja</div>
+            <div class="restaurant-name">
+                {% if restaurant %}
+                {{restaurant.name.capitalize }} {{restaurant.location.capitalize}}
+                {% endif %}
+            </div>
             <div class="header-right">
                 <a href="{% url 'qrgenerator:get_qrs' %}">
                     <div class="gen-codes">Generate QRs</div>
@@ -38,10 +43,11 @@
             </div>
         </div>
 </section>
+<!-- <div class="restaurant-mobile">{{ restaurant.name}} {{restaurant.location}}</div> -->
 <section class="main-section">
     <div class="main-section-left bg-light-gray np">
         <div class="menu-left bg-white">
-            <div>
+            <div class="menu-left-first">
                 {% block menu %}
                 <div class="menu-left-item">
                     <a href="{% url 'qrgenerator:menu' %}">Menu</a>

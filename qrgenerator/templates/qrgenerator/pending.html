@@ -5,7 +5,7 @@
 <div class="menu-elements bg-white">
     <div class="elements-top">
         <div class="elements-title">Pending</div>
-        <a href="{% url 'menus:get_menu' restaurant.restaurant_id 0 %}"><span class="create-order">Create</span></a>
+        <a target="_blank" href="{% url 'menus:get_menu' restaurant.restaurant_id 0 %}"><span class="create-order">Create</span></a>
     </div>
     <div class="elements-wrapper">
         {% if orders %}
