@@ -86,7 +86,7 @@ def paid_orders(request, order_id=None):
         'orders': orders, 'display_order': orders.first(), 'restaurant': restaurant,
         }
     if order_id:
-        if display_order := Order.get(order_id=order_id):
+        if display_order := Order.get(unique_value=order_id):
             display_order.new = False
             display_order.save()
             context['display_order'] = display_order
@@ -101,7 +101,7 @@ def pending_orders(request, order_id=None):
     context = {
         'orders': orders, 'display_order': orders.first(), 'restaurant': restaurant,
         }
-    if order_id and (display_order := Order.get(order_id=order_id)):
+    if order_id and (display_order := Order.get(unique_value=order_id)):
         display_order.new = False
         display_order.save()
         context['display_order'] = display_order
@@ -117,15 +117,18 @@ def new_orders(request):
         orders = restaurant.new_orders()
         paid = len(orders['paid'])
         pending = len(orders['pending'])
+        print(paid)
         return JsonResponse({'paid': paid, 'pending': pending})
 
 
 def mark_paid(request):
     if request.method == 'POST':
         order_id = request.POST.get('order_id')
-        order = Order.get(order_id=order_id)
-    if not order.restaurant.created_by == request.user:
-        return redirect('qrgenerator:login')
-    order.paid = True
-    order.save()
-    return redirect('qrgenerator:paid', order_id=order_id)
+        order = Order.get(unique_value=int(order_id))
+
+        if not order.restaurant.created_by == request.user:
+            return redirect('qrgenerator:login')
+        order.paid = True
+        order.save()
+        return redirect('qrgenerator:paid', order_id=order_id)
+

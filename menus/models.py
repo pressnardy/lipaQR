@@ -54,6 +54,7 @@ class Restaurant(models.Model):
                 return True
         return False
         
+        
     def new_orders(self):
         paid = self.orders.filter(paid=True, new=True).order_by('-order_id')
         pending = self.orders.filter(paid=False, new=True).order_by('-order_id')
