@@ -222,7 +222,7 @@ class OrderedItem(models.Model):
             raise TypeError('ITEM CANNOT BE NONE')
 
     def __str__(self):
-        return f"Item: {self.item.name} | Price: {self.item.unit_price} | Quantity: {self.quantity}"
+        return f"{self.ordered_item_id} | Item: {self.item.name} | Price: {self.item.unit_price} | Quantity: {self.quantity}"
 
 
 class ItemImage(models.Model):

@@ -51,7 +51,9 @@ def place_order(request, restaurant_id, table_number):
         order = form.save()
         print(order)
         items = util.get_ordered_items(request.POST)
-        util.save_to_pending(items, order=order)
+        # return HttpResponse(items)
+        pending = util.save_to_pending(items, order=order)
+        
         return redirect(
             'menus:pay_order', restaurant_id=restaurant_id, table_number=table_number,
             reference_number=reference_number
