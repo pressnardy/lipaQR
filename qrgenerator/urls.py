@@ -25,5 +25,6 @@ urlpatterns = [
     path('qr_images/', views.get_qr_codes, name='get_qrs'),
     path('new_orders/', views_dashbord.new_orders, name='new_orders'),
     path('mark_paid/', views_dashbord.mark_paid, name='mark_paid'),
+    path('create_order/<int:restaurant_id>/', views_dashbord.create_order, name='create_order'),
 ]
 

@@ -155,3 +155,30 @@ input:focus {
     padding: 20px 20px;
     align-self: flex-start;
 }
+
+.table-form-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--white);
+
+}
+
+.table-number-form {
+    background: var(--light-background);
+    width: 350px;
+    box-sizing: border-box;
+    padding: 40px 20px;
+    border-radius: 10px;
+}
+
+.create-order-button {
+    width: 100%;
+    background: rebeccapurple;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 20px;
+    font-size: 20px;
+    border: none;
+}

@@ -53,7 +53,8 @@ def place_order(request, restaurant_id, table_number):
         items = util.get_ordered_items(request.POST)
         # return HttpResponse(items)
         pending = util.save_to_pending(items, order=order)
-        
+        if request.POST.get('pay_later'):
+            return render(request, 'menus/order_placed.html')
         return redirect(
             'menus:pay_order', restaurant_id=restaurant_id, table_number=table_number,
             reference_number=reference_number

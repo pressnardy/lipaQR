@@ -2,7 +2,7 @@
 
 {% block main_section %}
 <div class="flex-center-col">
-<form class="order-form" action="{% url 'menus:place_order' restaurant.restaurant_id table_number %}" method="post">
+<form id="place-order-form" class="order-form" action="{% url 'menus:place_order' restaurant.restaurant_id table_number %}" method="post">
     {% csrf_token %}
     <div>
         <label class="form-label">Reference Number:
@@ -54,8 +54,9 @@
         <input id="phone-number" name="phone_number" value="{{ summary.phone_number }}" class="phone-input" placeholder="Enter Mpesa Number" required>
         </label>
         </div>
-        <div><span class="cancel">Back</span>
-        <button class="submit-button pay-order" type="submit">Pay Order</button>
+        <div><span class="cancel" id="pay-later">Pay After</span>
+        <button id="pay-now" class="submit-button pay-order" type="submit">Pay Now</button>
+        <input id="input-later" type="text" style="display: none;" readonly name="pay_later">
         </div>
     </div>
 </form>

@@ -17,3 +17,18 @@ function validate_tables_input(inputId) {
 
 
 validate_tables_input('tables');
+
+// function setTableNumber() {
+//     const form = document.getElementById('table-number-form')
+//     if(!form) {
+//         return
+//     }
+//     const tableNumber = form.querySelector('#table-number')?.value
+//     const createOrder = form.querySelector('#create-order')
+//     createOrder.addEventListener('click', (e)=> {
+//         e.preventDefault()
+//         console.log(form.action)
+//     })
+// }
+
+// setTableNumber()

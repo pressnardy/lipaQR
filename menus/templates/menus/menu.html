@@ -34,6 +34,7 @@
             </div>
         </div>
     </section>
+    {% block body %}
     <section class="flex-center flex-column restaurant-details">
         <div class="flex-center title-adjust">
             <div class="restaurant-name">{{ restaurant.name }}</div>
@@ -89,6 +90,7 @@
         </form>
         {% endblock %}
     </div>
+    {% endblock %}
 </body>
 </html>
 

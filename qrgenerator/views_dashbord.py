@@ -132,3 +132,9 @@ def mark_paid(request):
         order.save()
         return redirect('qrgenerator:paid', order_id=order_id)
 
+
+def create_order(request, restaurant_id):
+    if request.method == 'POST':
+        table_number = request.POST.get('table_number')
+        return redirect('menus:get_menu', restaurant_id=restaurant_id, table_number=table_number)
+    return render(request, 'qrgenerator/create_order.html')

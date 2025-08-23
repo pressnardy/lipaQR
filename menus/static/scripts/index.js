@@ -73,3 +73,20 @@ function setMenuTotal() {
     totalElement.textContent = totalValue.toFixed(2); 
 }
 
+function payLater(){
+    const later = document.getElementById('pay-later')
+    const form = document.getElementById('place-order-form')
+    const submitBtn = document.getElementById('pay-now')
+    const inputLater = document.getElementById('input-later')
+    if(!later || !form || !submitBtn || !inputLater){
+        return
+    }
+    
+    later.addEventListener('click', (e)=> {
+        e.preventDefault()
+        inputLater.value = 1
+        submitBtn.click()
+    })
+}
+
+payLater()
