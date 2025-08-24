@@ -90,7 +90,8 @@
     </div>
     <div class="workspace">
         <div id="search-wrapper" class="np">
-            <form action="" method="post" id="search-form">
+            <form action="{% url 'qrgenerator:search_order' %}" method="post" id="search-form">
+                {% csrf_token %}
                 <div id="query-wrapper">
                     <input type="search" name="query" id="input-search" required placeholder="Enter order id or ref no. or phone no.">
                 </div>

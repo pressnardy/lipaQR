@@ -44,6 +44,7 @@ class Restaurant(models.Model):
     
     def all_items(self):
         return self.items.all()
+    
 
     def in_menu(self, item_name=None, item_id=None):
         if item_name:
@@ -56,9 +57,10 @@ class Restaurant(models.Model):
         
         
     def new_orders(self):
+        all_orders = self.orders.filter(new=True).order_by('order_id')
         paid = self.orders.filter(paid=True, new=True).order_by('-order_id')
         pending = self.orders.filter(paid=False, new=True).order_by('-order_id')
-        return {'paid': paid, 'pending': pending}
+        return {'paid': paid, 'pending': pending, 'all':all_orders}
     
 
     def paid_orders(self, quantity=-1):
@@ -121,6 +123,8 @@ class Order(models.Model):
             if order := cls.objects.filter(order_id=unique_value).first():
                 return order
         if order := cls.objects.filter(reference_number=unique_value).first():
+            return order
+        if order := cls.objects.filter(phone_number=unique_value).order_by('-order_id').first():
             return order
         return None
     

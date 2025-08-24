@@ -26,5 +26,8 @@ urlpatterns = [
     path('new_orders/', views_dashbord.new_orders, name='new_orders'),
     path('mark_paid/', views_dashbord.mark_paid, name='mark_paid'),
     path('create_order/<int:restaurant_id>/', views_dashbord.create_order, name='create_order'),
+    path('orders/', views_dashbord.orders, name='orders'),
+    path('orders/<int:order_id>/', views_dashbord.orders, name='view_order'),
+    path("search_order/", views_dashbord.search_order, name='search_order'),
 ]
 

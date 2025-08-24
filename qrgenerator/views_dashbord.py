@@ -77,27 +77,7 @@ def mark_paid(request):
     return render(request, 'qrgenerator/menu.html')
 
 
-def paid_orders(request, order_id=None):
-    restaurant = request.user.restaurant
-    if not restaurant:
-        return HttpResponseForbidden('Access Denied')
-    orders = restaurant.orders.filter(paid=True).order_by('-order_id')
-    context = {
-        'orders': orders, 'display_order': orders.first(), 'restaurant': restaurant,
-        }
-    if order_id:
-        if display_order := Order.get(unique_value=order_id):
-            display_order.new = False
-            display_order.save()
-            context['display_order'] = display_order
-    return render(request, 'qrgenerator/paid.html', context)
-
-
-def pending_orders(request, order_id=None):
-    restaurant = request.user.restaurant
-    if not restaurant:
-        return HttpResponseForbidden('Access Denied')
-    orders = restaurant.orders.filter(paid=False).order_by('-order_id')
+def get_orders_context(order_id, orders, restaurant):
     context = {
         'orders': orders, 'display_order': orders.first(), 'restaurant': restaurant,
         }
@@ -105,7 +85,62 @@ def pending_orders(request, order_id=None):
         display_order.new = False
         display_order.save()
         context['display_order'] = display_order
+    return context
+
+
+def paid_orders(request, order_id=None):
+    restaurant = request.user.restaurant
+    if not restaurant:
+        return HttpResponseForbidden('Access Denied')
+    orders = restaurant.orders.filter(paid=True).order_by('order_id')
+    context = get_orders_context(order_id, orders, restaurant)
+    return render(request, 'qrgenerator/paid.html', context)
+
+
+def pending_orders(request, order_id=None):
+    restaurant = request.user.restaurant
+    if not restaurant:
+        return HttpResponseForbidden('Access Denied')
+    orders = restaurant.orders.filter(paid=False).order_by('order_id')
+    context = get_orders_context(order_id, orders, restaurant)
     return render(request, 'qrgenerator/pending.html', context)
+
+
+def orders(request, order_id=None):
+    restaurant = request.user.restaurant
+    if not restaurant:
+        return HttpResponseForbidden('Access Denied')
+    orders = restaurant.orders.filter(new=True).order_by('order_id')
+    context = get_orders_context(order_id, orders, restaurant)
+    return render(request, 'qrgenerator/orders.html', context)
+
+
+def order_not_found(request, order_id=None):
+    restaurant = request.user.restaurant
+    if not restaurant:
+        return HttpResponseForbidden('Access Denied')
+    orders = restaurant.orders.filter(new=True).order_by('order_id')
+    context = get_orders_context(order_id, orders, restaurant)
+    context['display_order'] = None
+    context['order_not_found'] = True
+    print(context)
+    return render(request, 'qrgenerator/orders.html', context)
+
+
+def search_order(request):
+    restaurant = request.user.restaurant
+    if not restaurant:
+        return HttpResponseForbidden('Access Denied')
+    query = request.POST.get('query')
+    order = Order.get(unique_value=query)
+    if not order:
+        return order_not_found(request)
+    if order.paid:
+        return paid_orders(request, order.order_id)
+    if order.new:
+        return orders(request, order.order_id)
+    return pending_orders(request, order.order_id)
+
 
 
 def get_qr_codes(request):
@@ -115,10 +150,14 @@ def get_qr_codes(request):
 def new_orders(request):
     if restaurant := request.user.restaurant:
         orders = restaurant.new_orders()
+        all_order = [
+            {'id': i.order_id, 'phoneNumber': i.phone_number, 'totalAmount': i.total_amount}
+                     for i in orders['all']
+            ]
         paid = len(orders['paid'])
         pending = len(orders['pending'])
         print(paid)
-        return JsonResponse({'paid': paid, 'pending': pending})
+        return JsonResponse({'paid': paid, 'pending': pending, 'all': all_order})
 
 
 def mark_paid(request):
@@ -138,3 +177,5 @@ def create_order(request, restaurant_id):
         table_number = request.POST.get('table_number')
         return redirect('menus:get_menu', restaurant_id=restaurant_id, table_number=table_number)
     return render(request, 'qrgenerator/create_order.html')
+
+

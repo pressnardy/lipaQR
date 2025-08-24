@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .import generator
 from django.urls import reverse
-from menus.models import Restaurant
+from menus.models import Restaurant, Order
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
@@ -73,7 +73,7 @@ def logout_view(request):
 def account(request):
     if restaurant := request.user.restaurant:
         context = {'restaurant': restaurant}
-        return render(request, 'qrgenerator/menu.html', context)
+        return redirect('qrgenerator:orders')
     return redirect('qrgenerator:add_restaurant')
 
 
@@ -91,3 +91,5 @@ def add_restaurant(request):
 def login_tester(request, username='pressnardy@gmail.com', password='zade12345'):
     user = authenticate(request, username=username, password=password)
     login(request, user)
+
+
