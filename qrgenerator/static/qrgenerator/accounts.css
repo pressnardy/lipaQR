@@ -39,10 +39,6 @@ body {
     
 }
 
-section {
-    /* padding: 0 0px; */
-}
-
 .page-header {
     display: flex;
     flex-direction: column;
@@ -245,10 +241,6 @@ a#add-new {
     white-space: nowrap;
 }
 
-span#new {
-
-}
-
 .plus-sign {
     font-size: 20px;
 }
@@ -260,6 +252,11 @@ span#new {
     width: 260px;
     overflow-y: auto;
 
+}
+
+#incomings-container {
+    width: 100%;
+    height: fit-content;
 }
 
 ol.elements-wrapper {
@@ -309,7 +306,7 @@ ol.elements-wrapper {
     /* text-align: center; */
     display: flex;
     align-items: center;
-    text-decoration: underline:
+    text-decoration: underline;
 }
 
 .active-tab > a {

@@ -9,7 +9,7 @@
     </div>
     <div class="elements-wrapper" id="">
         {% if display_order %}
-        <a href="{% url 'qrgenerator:view_order' display_order.order_id %}">
+        <a id="display-href" href="{% url 'qrgenerator:view_order' display_order.order_id %}">
         <div class="element-highlight {% if display_order.new %}is-new{% endif %}">
             <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" 
                 xmlns="http://www.w3.org/2000/svg" stroke="#663399" stroke-width="0.36"

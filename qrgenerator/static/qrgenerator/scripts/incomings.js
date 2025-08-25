@@ -41,12 +41,12 @@ function getViewOrderURL() {
 
 function updateIncomings(data) {
   const container = document.getElementById('incomings-container')
-  if(!container){
-    return
-  }
+  if(!container){ return }
   container.innerHTML = ""
-  const incomingOrders = data.all
+  const incomingOrders = removeDuplicate(data)
   incomingOrders.forEach(order => {
+    if(!order) {return}
+    
     const orderHTML = getOrderElement(order)
     container.appendChild(orderHTML)
     
@@ -55,18 +55,36 @@ function updateIncomings(data) {
 
 
 async function fetchAndUpdate() {
-  try {
-    const response = await fetch(newDataUrl);
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+    try {
+      const response = await fetch(newDataUrl);
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const data = await response.json();
+      updateAlerts(data);
+      updateIncomings(data)
+      
+    } catch (error) {
+      console.error('Fetch error:', error);
     }
-    const data = await response.json();
-    updateAlerts(data);
-    updateIncomings(data)
-    
-  } catch (error) {
-    console.error('Fetch error:', error);
-  }
+}
+
+
+function removeDuplicate(data) {
+    let allData = data.all;
+    const displayOrder = allData[0];
+    const duplicateHref = document.getElementById('display-href')?.href;
+
+    if (!duplicateHref) return allData;
+
+    const hrefParts = duplicateHref.split('/').filter(Boolean);
+    const duplicateID = hrefParts[hrefParts.length - 1];
+
+    if (displayOrder.id === Number(duplicateID)) {
+        allData = allData.slice(1);
+    }
+
+    return allData;
 }
 
 
