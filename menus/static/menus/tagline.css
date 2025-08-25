@@ -120,9 +120,10 @@ body {
 }
 
 .menus-tagline {
-    background:  var(--light-background);
-    height: 100%;
-    padding: 40px;
+    height: 80%;
+    border-radius: 20PX;
+    padding: 15px;
+    border: 2px solid var(--accent-color);
 }
 
 .menus-body {

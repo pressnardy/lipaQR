@@ -311,3 +311,72 @@ span.item-name {
 .scan-and-test {
     color: var(--accent-color);
 }
+
+.how-it-works {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+    gap: 40px;
+    font-size: 20px;
+    /* padding-left: 40px; */
+    
+}
+
+.steps {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 70%;
+    background: var(--black);
+    min-width: 350px;
+    max-width: 500px;
+    box-sizing: border-box;
+    color: rgb(216, 215, 215);
+    padding: 20px;
+    /* border: 2px solid var(--light-purple); */
+}
+
+.steps-title {
+    text-align: left;
+    /* padding-left: 40px; */
+    /* color: var(--accent-color); */
+    white-space: nowrap;
+    font-size: 28px;
+    width: 95%;
+    padding: 15px 30px;
+    margin: 0 10px;
+    box-sizing: border-box;
+    /* border: 1px solid var(--accent-color); */
+}
+
+.steps-list {
+    padding-left: 10px;
+    max-width: 600px;
+    box-sizing: border-box;
+    
+}
+
+.steps-list > a {
+    display: block;
+    padding: 10px 0px;
+    
+}
+
+.benefits {
+    background: var(--light-background);
+    /* border: 1px solid var(--light-purple); */
+    padding: 20px;
+    font-size: 24px;
+}
+
+.benefits-title {
+    padding-left: 15px;
+    color: var(--accent-color);
+}
+
+.benefit {
+    margin-bottom: 10px;
+}
+

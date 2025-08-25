@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=no">
     <link rel="icon" type="image/x-icon" href="{% static 'qrgenerator/svg/logo.svg' %}">
-    <title>Lipa QR {{ restaurant.name.capitalize }}</title>
+    <title>Glance QR {{ restaurant.name.capitalize }}</title>
     
     <link rel="stylesheet" href="{% static 'qrgenerator/accounts.css' %}">
     <link rel="stylesheet" href="{% static 'qrgenerator/workspace.css' %}">
@@ -28,7 +28,7 @@
                     </svg>
                 </div>
                 <div>
-                <span id="lipa">Lipa</span> <span id="q">Q</span><span>R</span>
+                <span id="lipa">Glance</span> <span id="q">Q</span><span>R</span>
                 </div>
             </div>
             <div class="restaurant-name">
@@ -51,6 +51,11 @@
                 {% block menu %}
                 <div class="menu-left-item">
                     <a href="{% url 'qrgenerator:menu' %}">Menu</a>
+                </div>
+                {% endblock %}
+                {% block orders %}
+                <div class="menu-left-item">
+                    <a href="{% url 'qrgenerator:orders' %}">Orders</a>
                 </div>
                 {% endblock %}
                 {% block pending %}
