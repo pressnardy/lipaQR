@@ -380,3 +380,77 @@ span.item-name {
     margin-bottom: 10px;
 }
 
+.pricing-section {
+    background: var(--light-background);
+    font-size: 20px;
+    padding: 80px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.pricing-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-width: 350px;
+    max-width: 700px;
+    width: 80%;
+
+}
+
+.pricing-title {
+    padding: 20px 0px;
+    font-size: 28px;
+    color: var(--accent-color);
+    text-align: center;
+}
+
+.pricing-body {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 40px;
+    font-size: 20px;
+    padding: 40px 0;
+    
+    
+}
+
+.fee-name {
+    font-weight: bold;
+}
+
+.fee-type {
+    border: 1px solid var(--accent-color);
+    width: 300px;
+    height: fit-content;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.negotiable {
+    color: var(--accent-color);
+    padding: 10px 0px;
+}
+
+a {
+    cursor: pointer;
+}
+
+a.pricing {
+    margin-right: 20px;
+    text-transform: lowercase;
+    text-transform: capitalize;
+    color: var(--faded-black)
+}
+
+a.pricing:hover {
+    text-decoration: underline;
+}
+
+.align-rc {
+    align-items: center;
+}

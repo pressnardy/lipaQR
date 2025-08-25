@@ -14,10 +14,14 @@
         
     }
     .tagline-body {
-        width: 100%;
+        width: 98%;
         white-space: wrap;
         padding: 0 10px;
         box-sizing: border-box;
+    }
+
+    a.pricing {
+        display: none;
     }
 }
 
