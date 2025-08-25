@@ -298,3 +298,16 @@ span.item-name {
     border-radius: 25px;
     margin-right: 0px;
 }
+
+.flex-rc {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: row;
+    gap: 40px;
+    width: 100%;
+}
+
+.scan-and-test {
+    color: var(--accent-color);
+}
