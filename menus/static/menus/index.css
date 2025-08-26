@@ -352,7 +352,7 @@ span.item-name {
 }
 
 .steps-list {
-    padding-left: 10px;
+    padding-left: 20px;
     max-width: 600px;
     box-sizing: border-box;
     
@@ -454,3 +454,14 @@ a.pricing:hover {
 .align-rc {
     align-items: center;
 }
+
+a.steps-signup {
+    display: block;
+    padding: 20px;
+    color: var(--faded-black);
+    background: white;
+    width: fit-content;
+    box-sizing: border-box;
+    font-weight: bold;
+}
+
