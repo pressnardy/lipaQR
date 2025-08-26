@@ -29,5 +29,6 @@ urlpatterns = [
     path('orders/', views_dashbord.orders, name='orders'),
     path('orders/<int:order_id>/', views_dashbord.orders, name='view_order'),
     path("search_order/", views_dashbord.search_order, name='search_order'),
+    path("ads", views.ads, name='ads'),
 ]
 
