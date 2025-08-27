@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{% static 'qrgenerator/svg/logo.svg' %}">
+    <link href="{% static 'qrgenerator/accounts.css' %}" rel="stylesheet">
+    <link href="{% static 'menus/index.css' %}" rel="stylesheet">
+    <link href="{% static 'menus/tagline.css' %}" rel="stylesheet">
+    <link href="{% static 'menus/responsive.css' %}" rel="stylesheet">
+    <link href="{% static 'menus/bluetheme.css' %}" rel="stylesheet">
+    <title>Glance QR</title>
+</head>
+<body>
+    <section class="page-header np" style="margin-bottom: -20px; display: none;">
+        <div class="header-top">
+            <div class="page-title">
+                <div class="logo">
+                    <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="2" y="2" width="28" height="28" fill="rebeccapurple" />
+                        <rect x="7" y="7" width="18" height="18" fill="white" />
+                        <rect x="11" y="11" width="10" height="10" fill="rebeccapurple" />
+                    </svg>
+                </div>
+                <div style="font-size: 24px;">
+                <span id="lipa" style="font-size: 24px;">Glance</span> <span id="q">Q</span><span>R</span>
+                </div>
+            </div>
+            <div class="header-right align-rc">
+                <a href="#pricing-title" class="pricing">Pricing</a>
+                <a href="{% url 'qrgenerator:get_qrs' %}">
+                    <div class="gen-codes">Create QRs</div>
+                </a>
+            </div>
+            <br>
+            <br>
+        </div>
+    </section>
+    <section class="tagline" style="margin-bottom: -20px;">
+        <div class="tagline-wrapper">
+            <br>
+            <br>
+            <div class="tagline-heading">
+                <div class="page-title">
+                <div class="logo">
+                    <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="2" y="2" width="28" height="28" fill="rebeccapurple" />
+                        <rect x="7" y="7" width="18" height="18" fill="white" />
+                        <rect x="11" y="11" width="10" height="10" fill="rebeccapurple" />
+                    </svg>
+                </div>
+                <div style="font-size: 32px;">
+                <span id="lipa" style="font-size: 24px;">Glance</span> <span id="q" style="font-size: 24px;">Q</span><span style="font-size: 24px;">R</span>
+                </div>
+            </div>
+                <!-- <div class="tagline-heading-top" style="font-size: 24px;">QR code menus</div>
+                <div class="tagline-heading-bottom" style="font-size: 24px;">
+                <span class="for" style="font-size: 24px;">for</span> 
+                <span class="restaurants" style="font-size: 24px;">Restaurants</span>
+                </div>
+            </div> -->
+            <div class="tagline-body" style="white-space: nowrap; font-size: 16px;">
+                QR code menus for Restaurants
+            </div>
+            <br>
+            <br>
+            <br>
+        </div>
+    </section>
+    <section>
+        <div class="how-it-works">
+            <div class="steps" style="display: none;">
+                <div class="steps-title">
+                    HOW IT WORKS 
+                </div>
+                <div>
+                    <div class="steps-list">
+                        <a class="steps-signup" href="{% url 'qrgenerator:register' %}">Sign Up</a>
+                        <a>Build your menu</a>
+                        <a>Upload the images and prices</a>
+                        <a>Generate and print codes</a>
+                        <a>Sticks the codes on respective tables</a>
+                        <a>Match incoming orders and table numbers from the dashboard</a>
+                        <a>Deliver orders to customer directly at their tables</a>
+                    </div>
+                </div>    
+            </div>
+            <br>
+            <div class="benefits">
+                <div class="benefits-title">BENEFITS</div>
+                <ol>
+                    <li class="benefit">Hire fewer waiters.</li>
+                    <li class="benefit">Reduce waiters' kitchen - table trips for orders.</li>
+                    <li class="benefit">Reduce queues at the cashier with pre-paid services.</li>
+                    <li class="benefit">Monitor Payments and Orders in a single dashbord.</li>
+                    <li class="benefit">Track all sells and anlytics at a glance.</li>
+                    <li class="benefit">Instantly Remove unavailable items from menus.</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+    <section class="menu-images-section flex-cc">
+        <div class="menu-images flex-cc">
+            <div class="menus-tagline">
+                <h1 class="scan-and-test">Scan And Test</h1>
+            </div>
+            <div class="test_qr">
+                <div class="test-qr-wrapper">
+                    <img src="{% static 'menus/screenshots/test_qr.PNG' %}" alt="test qr image to scan">
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+    </section>
+    <section class="section-qrs flex-cc">
+        <div class="qr-codes maxw-600">
+            <div class="qr-codes-tagline">
+                Unlimted Downloads
+            </div>
+            <div class="qr-img-wrapper">
+                <img src="{% static 'menus/screenshots/qr_codes.PNG' %}">
+            </div>
+        </div>
+    </section>
+    <section class="dashbord">
+        <div class="dashbord-wrapper flex-cc">
+        <div class="text-wrapper">          
+        <div class="dashbord-tagline">Intuitive Dashbords</div>
+        <div class="dashbord-feature">
+                <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" 
+                xmlns="http://www.w3.org/2000/svg" stroke="#663399" stroke-width="0.36"
+                transform="rotate(0)">
+                <path d="M9.39862 4.32752C9.69152 4.03463 10.1664 4.03463 10.4593 4.32752L16.8232 10.6915C17.5067 11.3749 17.5067 12.4829 16.8232 13.1664L10.4593 19.5303C10.1664 19.8232 9.69152 19.8232 9.39863 19.5303C9.10573 19.2374 9.10573 18.7625 9.39863 18.4697L15.7626 12.1057C15.8602 12.0081 15.8602 11.8498 15.7626 11.7521L9.39863 5.38818C9.10573 5.09529 9.10573 4.62041 9.39862 4.32752Z" fill="rebeccapurple"/>
+            </svg>
+            
+            Track incoming orders in realtime
+        </div>
+        <div class="dashbord-feature">
+                <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" 
+                xmlns="http://www.w3.org/2000/svg" stroke="#663399" stroke-width="0.36"
+                transform="rotate(0)">
+                <path d="M9.39862 4.32752C9.69152 4.03463 10.1664 4.03463 10.4593 4.32752L16.8232 10.6915C17.5067 11.3749 17.5067 12.4829 16.8232 13.1664L10.4593 19.5303C10.1664 19.8232 9.69152 19.8232 9.39863 19.5303C9.10573 19.2374 9.10573 18.7625 9.39863 18.4697L15.7626 12.1057C15.8602 12.0081 15.8602 11.8498 15.7626 11.7521L9.39863 5.38818C9.10573 5.09529 9.10573 4.62041 9.39862 4.32752Z" fill="rebeccapurple"/>
+            </svg>
+            
+            Realtime Statistics
+        </div>
+        <div class="dashbord-feature">
+                <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" 
+                xmlns="http://www.w3.org/2000/svg" stroke="#663399" stroke-width="0.36"
+                transform="rotate(0)">
+                <path d="M9.39862 4.32752C9.69152 4.03463 10.1664 4.03463 10.4593 4.32752L16.8232 10.6915C17.5067 11.3749 17.5067 12.4829 16.8232 13.1664L10.4593 19.5303C10.1664 19.8232 9.69152 19.8232 9.39863 19.5303C9.10573 19.2374 9.10573 18.7625 9.39863 18.4697L15.7626 12.1057C15.8602 12.0081 15.8602 11.8498 15.7626 11.7521L9.39863 5.38818C9.10573 5.09529 9.10573 4.62041 9.39862 4.32752Z" fill="rebeccapurple"/>
+            </svg>
+            
+            Payments Tracker
+        </div>
+        </div>
+        <div class="dashbord-img-wrapper maxw-600">
+            <img class="dashbord-screenshot" src="{% static 'menus/screenshots/dashbord.PNG' %}" alt="">
+        </div>
+        </div> 
+    </section>
+    <section class="pricing-section">
+        <div class="pricing-wrapper">
+            <div class="pricing-title" id="pricing-title">
+                PRICING
+            </div>
+            <div class="pricing-body">
+            <div class="setup-fee fee-type">
+                <div class="fee-name">One Time Setup Fee:</div>
+                <div class="fee-value">KES: 10,000</div>
+                <div class="negotiable">(Bei ya Kuongea)</div>
+            </div>
+            <div class="sub-fee fee-type">
+                <div class="fee-name">Monthly Fee:</div>
+                <div class="fee-value">KES: 2,000</div>
+                
+            </div>
+            </div>
+        </div>
+        <br>
+        <br>
+    </section>
+    <footer>
+        <div class="footer-wrapper">
+        <div class="footer-left">
+            <div class="about-us">About Us</div>
+            <div class="about-us-p">We streamline service delivery for restaurants and eateries using QR codes
+            </div>   
+            </div>
+        <div class="footer-right">
+            <div class="contacts">Contacts</div>
+            <div class="phone-number"><a href="tel:0743433795">+254743433795</a></div>
+        </div>
+        </div>
+    </footer>
+</body>
+</html>
