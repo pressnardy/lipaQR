@@ -14,3 +14,21 @@
     --light-purple:rgb(201, 167, 248, 0.9);
 }
 
+@media screen and (max-width: 450px) {
+    .area-heading {
+        font-size: 20px;
+    }
+
+    .text-body {
+        font-size: 16px;
+    }
+
+    .large-title {
+        font-size: 24px;
+    }
+
+    .benefit, .step {
+        font-size: 16px;
+    }
+}   
+
