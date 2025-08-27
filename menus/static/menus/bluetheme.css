@@ -1,0 +1,15 @@
+:root {
+    --accent-color: rgb(4, 82, 184);
+    --background-color: #fceae0;
+    --light-background: #fdeee5;
+    --dark-gray: #2a353d;
+    --white: #ffffff;
+    --black: #000000;
+    --accent-b: #f35217;
+    --light-background: rgb(228, 225, 225);
+    --gray: rgb(163, 163, 163);
+    --info-orange: rgb(236, 155, 4);
+    --light-green: rgb(17, 18, 19);
+    --faded-black: rgb(37, 36, 36);
+    --light-purple:rgb(201, 167, 248, 0.9);
+}
