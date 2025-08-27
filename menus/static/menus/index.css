@@ -477,3 +477,8 @@ a.steps-signup {
     font-weight: bold;
 }
 
+.steps-list > a {
+    letter-spacing: normal;
+    
+}
+
