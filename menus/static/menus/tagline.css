@@ -142,7 +142,8 @@ body {
     flex-wrap: wrap;
     gap: 40px;
     background: var(--light-background);
-    padding: 60px 0;
+    padding: 60px 0 0px 0;
+
 }
 
 .qr-codes-tagline {
@@ -158,7 +159,7 @@ body {
 
 .dashbord {
     background: var(--light-background);
-    padding: 40px 0px;
+    padding: 20px 0px;
     min-height: fit-content;
     box-sizing: border-box;
 }
