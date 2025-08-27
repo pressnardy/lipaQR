@@ -310,6 +310,7 @@ span.item-name {
 
 .scan-and-test {
     color: var(--accent-color);
+    margin: 0px;
 }
 
 .how-it-works {
@@ -369,7 +370,7 @@ span.item-name {
     font-size: 20px;
     box-sizing: border-box;
     max-width: 100vw;
-    min-width: 350px;
+    min-width: 360px;
 }
 
 .benefits > ol {
@@ -386,7 +387,7 @@ span.item-name {
 }
 
 .benefit {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 
 }
 
@@ -463,6 +464,7 @@ a.pricing:hover {
 
 .align-rc {
     align-items: center;
+    justify-content: flex-end;
 }
 
 a.steps-signup {

@@ -29,4 +29,15 @@
     .header-top {
         padding: 10px 0px;
     }
+
+    a.create-qrs {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    }
+
+    .gen-codes {
+        margin-right: 10px;
+    }
 }
+
