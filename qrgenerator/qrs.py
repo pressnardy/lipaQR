@@ -59,7 +59,7 @@ def generate_qr_code(url, text, font_size=100):
 
 def gen_images(tables, restaurant_id, base_url=''):
     if not base_url:
-        base_url = os.environ.get('BASE_URL')
+        base_url = os.environ.get('BASE_QR_URL')
     for i in range(int(tables)):
         table_number = str(i + 1).zfill(2)
         file_name = f"qr_code_{restaurant_id}_{table_number}.PNG"
@@ -84,4 +84,4 @@ if __name__ == "__main__":
     restaurant_id = 1
     tables = 5
     gen_images(tables, restaurant_id)
-    print(f"Generated {tables} QR codes for restaurant {restaurant_id}.")
+    
