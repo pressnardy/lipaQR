@@ -27,7 +27,7 @@
         <div class="qr-codes-wrapper" id="qr-codes-wrapper">
             {% for i in qr_urls %}
                 <div class="qr-code">
-                    <img src="{% static i %}" alt="QR Code image">
+                    <img src="{{ i }}" alt="QR Code image">
                 </div>
             {% endfor %}
         </div>

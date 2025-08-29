@@ -1,8 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from .import generator
-from django.urls import reverse
-from menus.models import Restaurant, Order
+from .import qrs
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
@@ -25,8 +22,8 @@ def get_qr_codes(request):
         if restaurant := request.user.restaurant:
             total_tables = int(request.POST.get('tables'))
             restaurant_id = restaurant.restaurant_id
-            generator.gen_images(total_tables, restaurant_id)
-            qr_urls = [f'qrgenerator/{restaurant_id}/qr_code_{restaurant_id}{str(i + 1).zfill(2)}.png' for i in range(total_tables)]
+            qrs.gen_images(total_tables, restaurant_id)
+            qr_urls = [i.url for i in restaurant.qr_codes.all()]
             context['qr_urls'] = qr_urls
             context['restaurant'] = restaurant
             return render(request, 'qrgenerator/qr_images.html', context)
