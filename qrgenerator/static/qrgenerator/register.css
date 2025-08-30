@@ -9,15 +9,22 @@
     --brown: #862603;
 }
 
+html {
+    max-width: 100vw;
+    overflow-x: hidden;
+
+}
+
 body {
     /* background-color: var(--light-background); */
     font-family: Arial, sans-serif;
     letter-spacing: 2px;
     font-size: 16px;
-    width: 100vw;
+    width: 100%;
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 a {
@@ -68,6 +75,9 @@ a {
 
 .registration {
     text-align: center;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100vw;
 }
 
 .registration-nav {
@@ -75,6 +85,7 @@ a {
     justify-content: space-between;
     padding: 20px 40px;
     box-sizing: border-box;
+    max-width: 100vw;
 
 }
 
@@ -155,7 +166,7 @@ input:focus {
 .button-register {
     width: 100%;
     font-size: 16px;
-    padding: 10px 0;
+    padding: 20px 0;
     background: var(--black);
     box-sizing: border-box;
     color: var(--white);
@@ -169,3 +180,33 @@ input:focus {
     color: rgb(126, 2, 2);
     
 } 
+
+@media screen and (max-width: 500px) {
+    .registration-nav {
+        padding: 20px;
+    }
+
+    .form-wrapper {
+        padding: 20px;
+        box-sizing: border-box;
+
+    }
+
+    form.form-register {
+        width: 100%;
+        box-sizing: border-box;
+        max-width: 330px;
+    }
+
+    .input-wrapper {
+        width: 100%;
+        box-sizing: border-box;
+        
+    }
+
+    #eye-wrapper {
+        left: 88%;
+    }
+
+
+}
