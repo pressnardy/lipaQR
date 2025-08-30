@@ -3,7 +3,8 @@
 <head>
     {% load static %}
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="initial-scale=1, minimum-scale=1, 
+    width=device-width, interactive-widget=resizes-content user-scalable=false">
     <title>Glance QR</title>
     <meta name="description" content="QR code menus for restaurants">
 
@@ -28,7 +29,7 @@
     <title>Glance QR</title>
 </head>
 <body>
-    <section class="page-header np">
+    <section class="page-header">
         <div class="header-top">
             <div class="page-title">
                 <div class="logo">
@@ -47,7 +48,7 @@
                 <a href="{% url 'qrgenerator:get_qrs' %}" class="create-qrs">
                     <div class="gen-codes">Create QRs</div>
                 </a>
-            </div>
+            </div>    
         </div>
     </section>
     <section class="tagline">
@@ -64,7 +65,7 @@
             </div>
         </div>
     </section>
-    <section>
+    <section class="">
         <br>
         <br>
         <div class="how-it-works">
@@ -181,7 +182,7 @@
         <br>
         <br>
     </section>
-    <footer>
+    <footer class="">
         <div class="footer-wrapper">
         <div class="footer-left">
             <div class="about-us">About Us</div>

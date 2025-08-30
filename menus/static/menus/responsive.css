@@ -26,9 +26,36 @@
 }
 
 @media screen and (max-width: 400px) {
-    .header-top {
-        padding: 10px 0px;
+    .np {
+        display: none;
     }
+
+    html, body {
+        width: 100%;
+        margin: 0;
+        padding: 0;      
+        box-sizing: border-box;
+        overflow-x: hidden;
+        min-width: unset;
+        
+    }
+
+    .dashbord-wrapper {
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+
+    .dashbord-img-wrapper {
+        min-width: unset;
+        width: 100%;
+        min-height: unset;
+    }
+
+    .maxw-600 {
+        /* width: 80%; */
+        /* max-width: 330px;           */
+    }
+
 
     a.create-qrs {
     display: flex;
@@ -38,10 +65,46 @@
 
     .gen-codes {
         margin-right: 10px;
+        box-sizing: border-box;
+
     }
 
     .footer-wrapper {
         padding: 40px 20px;
+    }
+
+    .dashbord {
+        min-width: unset;
+    }
+
+    .header-right {
+        display: none;
+    }
+
+    .header-top {
+        padding: 10px 0px;
+        box-sizing: border-box;
+    }
+
+    .page-title {
+        width: 100%;
+        justify-content: space-between;
+        margin: 0px;
+        padding: 0px 10px;
+        box-sizing: border-box;
+        max-width: 100%;
+    }
+
+    .how-it-works{
+        width: 100%;
+        box-sizing: border-box;
+        flex-wrap: nowrap;
+
+    }
+    .benefits {
+        width: 100%;
+        /* max-width: 100vw; */
+        /* align-self: center; */
     }
 }
 

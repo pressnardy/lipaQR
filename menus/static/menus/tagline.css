@@ -28,8 +28,9 @@ body {
     font-size: 16px;
     margin: 0;
     width: 100vw;
-    min-width: 360px;
+    min-width: 350px;
 }
+
 
 .tagline {
     /* background: var(--light-purple); */
@@ -159,9 +160,10 @@ body {
 
 .dashbord {
     background: var(--light-background);
-    padding: 20px 0px 20px 10px;
+    padding: 20px 0px;
     min-height: fit-content;
     box-sizing: border-box;
+    width: 100%;
 }
 
 .dashbord-wrapper {
@@ -178,10 +180,8 @@ body {
 }
 
 .dashbord-img-wrapper {
-    /* max-width: 95vw; */
-    min-width: 350px;
     min-height: 300px;
-    /* border: 1px solid var(--light-purple); */
+    width: 100%;
 }
 
 .dashbord-tagline {
