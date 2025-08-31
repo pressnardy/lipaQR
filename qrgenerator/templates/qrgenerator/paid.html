@@ -1,8 +1,9 @@
 {% extends 'qrgenerator/dashbord.html' %}
 
 {% block paid %}
-<div class="menu-left-item active-tab">
-    <a href="{% url 'qrgenerator:paid' %}">Paid
+<div class="menu-left-item">
+    <a href="{% url 'qrgenerator:paid' %}">
+        <span class="active-tab">Paid</span>
         <span id="incoming-paid" class="incoming">0</span>
     </a>
 </div>

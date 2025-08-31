@@ -38,8 +38,15 @@
             </div>
             <div class="header-right">
                 <a href="{% url 'qrgenerator:get_qrs' %}">
-                    <div class="gen-codes">Generate QRs</div>
+                    <div class="gen-codes">Get QRs</div>
                 </a>
+            </div>
+        </div>
+        <div class="header-bottom mv">
+            <div>
+                <div class="dash-logout">
+                    <a href="{% url 'qrgenerator:logout' %}"><div>Log Out</div></a>
+                </div>
             </div>
         </div>
 </section>
@@ -73,7 +80,7 @@
                 </div>
                 {% endblock %}
             </div>
-            <div class="menu-left-item">
+            <div class="menu-left-item mi">
                 <div class="dash-logout">
                     <a href="{% url 'qrgenerator:logout' %}"><div>Log Out</div></a>
                 </div>

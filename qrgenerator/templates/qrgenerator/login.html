@@ -13,14 +13,24 @@
     <section class="registration">
         <div class="registration-nav">
             <div>
-                <a href="{% url 'qrgenerator:index' %}" class="back"><svg fill="currentColor" height="22" viewBox="0 0 22 22" width="22" 
-                    xmlns="http://www.w3.org/2000/svg"><path 
-                    class="back-arrow-path" 
-                    d="M15.75 4H13L6 11L13 18H15.75L8.75 11L15.75 4Z"></path>
-                </svg>Back</a>                
+                <a href="{% url 'qrgenerator:index' %}" class="back">
+                    <svg fill="currentColor" height="22" viewBox="0 0 22 22" width="22" 
+                        xmlns="http://www.w3.org/2000/svg"><path 
+                        class="back-arrow-path" 
+                        d="M15.75 4H13L6 11L13 18H15.75L8.75 11L15.75 4Z"></path>
+                    </svg>
+                    Back
+                </a>                
             </div>
             <div>
-                <a href="{% url 'qrgenerator:register' %}" class="login-register">Sign Up</a>                
+                <a href="{% url 'qrgenerator:register' %}" class="login-register">
+                    Sign Up
+                    <svg fill="currentColor" height="22" viewBox="0 0 22 22" width="22" 
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path class="forward-arrow-path" 
+                        d="M6.25 4H9L16 11L9 18H6.25L13.25 11L6.25 4Z"></path>
+                    </svg>
+                </a>                
             </div>
         </div>
         <div class="form-wrapper">

@@ -4,7 +4,18 @@
     background: white;
 }
 
+.header-bottom {
+    display: none;
+}
+
+.active-tab {
+    text-decoration-color: rebeccapurple;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 4px;
+}
+
 @media screen and (max-width: 850px) {
+    
 
     .restaurant-mobile {
         display: block;
@@ -70,6 +81,41 @@
         display: none;
     }
 
+    
+}
+
+@media screen and (max-width: 400px) {
+    .restaurant-name {
+        display: none;
+    }
+
+    .header-bottom {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        box-sizing: border-box;
+        width: 100%;
+        padding: 0 20px 10px 20px;
+        background: var(--white);
+    }
+
+    .mi {
+        display: none;
+    }
+
+    .menu-left-first {
+        justify-content: space-between;
+        width: 100%;
+        padding-right: 20px;
+    }
+
+    .stats {
+        min-height: fit-content;
+    }
+
+    .active-tab {
+        width: unset;
+    }
     
 }
 

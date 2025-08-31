@@ -28,6 +28,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://cosmic-midge-presumably.ngrok-free.app',
+]
 
 # Application definition
 

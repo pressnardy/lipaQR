@@ -95,6 +95,13 @@ a {
     cursor: pointer;
 }
 
+.login-register {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    flex-wrap: nowrap;
+}
+
 
 .login-register:hover {
     border-bottom: 2px solid var(--black);
