@@ -1,5 +1,10 @@
 {% extends 'qrgenerator/dashbord.html' %}
 
+{% block orders %}
+<div class="menu-left-item active-tab">
+    <a href="{% url 'qrgenerator:orders' %}">Orders</a>
+</div>
+{% endblock %}
 
 {% block menu_elements %}
 <div class="menu-elements bg-white">
