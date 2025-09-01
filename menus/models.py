@@ -45,7 +45,11 @@ class Restaurant(models.Model):
     def all_items(self):
         return self.items.all()
     
-
+    def menu_by_category(self, category):
+        items = self.menu.filter(category=category)
+        menu = list(items) + [i for i in self.menu if i not in items]
+        return menu
+    
     def in_menu(self, item_name=None, item_id=None):
         if item_name:
             if item := self.items.filter(available=True, name=item_name).first():
@@ -91,6 +95,7 @@ class Item(models.Model):
     unit_price = models.DecimalField(max_digits=10, decimal_places=2)
     image = models.FileField(upload_to='item_images/', blank=False, null=True)
     available = models.BooleanField(default=True)
+    category = models.CharField(max_length=50, null=True, blank=False)
     restaurant = models.ForeignKey(Restaurant, related_name="items", on_delete=models.SET_NULL, null=True, blank=True)
 
     @classmethod

@@ -6,6 +6,10 @@ from .forms import OrderForm
 
 
 # Create your views here.
+def get_restaurant(request, restaurant_id):
+    restaurant = util.get_restaurant(restaurant_id=restaurant_id)
+    if not restaurant:
+        return HttpResponse("Restaurant not found. Please scan again.", status=404)
 
 
 def get_menu(request, restaurant_id, table_number):
@@ -13,14 +17,16 @@ def get_menu(request, restaurant_id, table_number):
     if not restaurant:
         return HttpResponse("Restaurant not found. Please scan again.", status=400)
     menu = restaurant.menu
+    if category := request.POST.get('category'):
+        menu = restaurant.menu_by_category(category)
     context = {
         'restaurant': restaurant,
         'table_number': table_number,
         'menu': menu,
     }
     return render(request, 'menus/menu.html', context)
-
-
+        
+ 
 def get_order(request, restaurant_id, table_number):
     if request.method == 'POST':
         order_details = [[k, v] for k, v in request.POST.items()]

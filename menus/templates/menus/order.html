@@ -1,5 +1,5 @@
 {% extends 'menus/menu.html' %}
-
+{% block categories %}{% endblock %}
 {% block main_section %}
 <div class="flex-center-col">
 <form id="place-order-form" class="order-form" action="{% url 'menus:place_order' restaurant.restaurant_id table_number %}" method="post">

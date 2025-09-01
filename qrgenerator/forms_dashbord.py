@@ -5,9 +5,10 @@ class AddItemForm(forms.ModelForm):
     AVAILABLE_CHOICES = [
         ('available', 'Available')
     ]
+    
     class meta:
         model = Item
-        fields = ['name', 'unit', 'unit_price', 'image', 'description', 'available']
+        fields = ['name', 'unit', 'unit_price', 'image', 'category', 'description', 'available']
     available = forms.ChoiceField(choices=AVAILABLE_CHOICES, widget=forms.Select(
             attrs={'name': 'available', 'id':'available', 'class': 'form-input'}
         ))

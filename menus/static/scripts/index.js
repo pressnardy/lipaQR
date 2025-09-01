@@ -90,3 +90,20 @@ function payLater(){
 }
 
 payLater()
+
+function categorize() {
+    const categoryForm = document.getElementById('category-form')
+    const categories = categoryForm.querySelectorAll('.cat')
+    const categoryInput = categoryForm.querySelector('#category')
+    if (!categoryForm || !categoryInput || !categories);
+    categories.forEach(category => {
+        category.addEventListener('click', (e)=> {
+            e.preventDefault()
+            categoryInput.value = category.id
+            categoryForm.submit()
+            console.log('submitted')
+        })
+    })
+}
+
+categorize()

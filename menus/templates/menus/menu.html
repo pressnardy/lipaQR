@@ -42,10 +42,33 @@
             <div class="restaurant-name">{{ restaurant.location }}</div>
         </div>
         <div class="table">TABLE <span class="">{{ table_number }}</span></div>
+    </section>
+    {% block categories %}
+    <section class="categories-section">
+        <form id="category-form" class="categories" method="post" action="{% url 'menus:get_menu' restaurant.restaurant_id table_number %}">
+            {%csrf_token %}
+            <input name="category" id="category" type="hidden" value="" readonly>
+        <div class="cat drinks" id="drinks">
+            Drinks
+        </div>
+        <div class="cat beverages" id="beverages">
+            Beverages
+        </div>
+        <div class="cat meat" id="meat">
+            Meat
+        </div>
+        <div class="cat snarks" id="snarks">
+            Snarks
+        </div>
+        <div class="cat other" id="other">
+            Other
+        </div>
+        </form>
     </section>        
+    {% endblock %}
     <section class="restaurant-menu">
         {% block main_section %}
-        <form action="{% url 'menus:get_order' restaurant.restaurant_id table_number %}" class="menu-form" method="post">
+        <form action="{% url 'menus:get_order' restaurant.restaurant_id table_number %}" class="menu-form" method="POST">
             {% csrf_token %}
             <div style="display: none;">
                 <input type="text" id="restaurant-id" name="restaurant_id" value="{{ restaurant.restaurant_id }}">

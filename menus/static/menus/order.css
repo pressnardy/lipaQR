@@ -25,8 +25,7 @@
 
 .order-form {
     text-align: left;
-    width: 330px;
-    padding: 20px 0;
+    padding: 20px 10;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -97,6 +96,7 @@ input:focus {
     margin-right: 25px;
     font-weight: bold;
     font-size: 18px;
+    cursor: pointer;
 }
 
 .pay-order {

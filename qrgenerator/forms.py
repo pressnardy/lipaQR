@@ -31,7 +31,7 @@ class AddItemForm(forms.ModelForm):
 class EditItemForm(forms.ModelForm):
     class Meta:
         model = Item
-        fields = ['name', 'unit', 'description', 'available', 'unit_price']
+        fields = ['name', 'unit', 'description', 'available', 'category', 'unit_price']
         widgets = {
             'name': forms.TextInput(attrs={'name': 'name', 'id': 'name', 'class': 'form-input', 'placeholder': 'Item Name'}),
             'description': forms.Textarea(attrs={'name': 'description', 'id': 'description', 'class': 'form-input', 'placeholder': 'Description'}),
@@ -41,9 +41,12 @@ class EditItemForm(forms.ModelForm):
                 choices=[('available', 'Available'), ('unavailable', 'Unavailable')],
                 attrs={'name': 'available', 'id': 'available', 'class': 'form-input'}
             ),
+            'category': forms.Select(
+                choices=[('drinks', 'Drinks'), ('beverages', 'Beverages'), ('snarks', 'Snarks'), ('meat', 'Meat'), ('other', 'Other')],
+                attrs={'name': 'available', 'id': 'available', 'class': 'form-input'}
+            ),
         }
         
-
 class RegistrationForm(UserCreationForm):
     class Meta:
         model = User
