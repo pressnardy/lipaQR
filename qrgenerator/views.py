@@ -51,9 +51,9 @@ def register(request):
         form = RegistrationForm(request.POST)
         if util.is_existing(User, request.POST):
             errors = 'User Already Exists!!'
-            return render('grgenerator/register.html', {'errors': errors})
+            return render(request, 'grgenerator/register.html', {'errors': errors})
         if not form.is_valid():
-            return render('grgenerator/register.html', {'errors': form.errors})
+            return render(request, 'grgenerator/register.html', {'errors': form.errors})
         if user := form.save():
             login(request, user)
             return redirect('qrgenerator:add_restaurant')
