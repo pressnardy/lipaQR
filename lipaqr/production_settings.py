@@ -31,6 +31,12 @@ DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 
 ALLOWED_HOSTS = [str(host).strip() for host in os.environ.get('ALLOWED_HOSTS').split(',')]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://cosmic-midge-presumably.ngrok-free.app',
+    'https://lipaqr-65q89.ondigitalocean.app',
+]
+
+
 # Application definition
 
 INSTALLED_APPS = [

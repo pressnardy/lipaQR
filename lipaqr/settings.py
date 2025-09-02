@@ -30,6 +30,7 @@ ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = [
     'https://cosmic-midge-presumably.ngrok-free.app',
+    'https://lipaqr-65q89.ondigitalocean.app',
 ]
 
 # Application definition
