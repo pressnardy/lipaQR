@@ -1,9 +1,17 @@
 from django.db import models
 from django.contrib.auth.models import User
 from dotenv import load_dotenv
-
+from django.contrib.auth.hashers import make_password, check_password, identify_hasher
 
 load_dotenv()
+
+def is_hashed(value):
+    try:
+        identify_hasher(value)
+        return True
+    except ValueError:
+        return False
+
 
 class LowercaseTextField(models.CharField):
     def __init__(self, *args, **kwargs):
@@ -42,6 +50,9 @@ class Restaurant(models.Model):
     def menu(self):
         return self.items.filter(available=True)
     
+    def all_waiters(self):
+        return self.waiters.all()
+
     def all_items(self):
         return self.items.all()
     
@@ -121,6 +132,7 @@ class Order(models.Model):
     total_amount = models.DecimalField(decimal_places=2, max_digits=10, null=True, default=None)
     paid = models.BooleanField(default=False)
     new = models.BooleanField(default=True)
+    created_by = models.ForeignKey('Waiter', on_delete=models.SET_NULL, null=True, related_name='orders')
 
     @classmethod
     def get(cls, unique_value):
@@ -241,4 +253,53 @@ class ItemImage(models.Model):
     image_field = models.FileField(upload_to='item_images/') 
 
 
+class Waiter(models.Model):
+    name = LowercaseTextField(max_length=50, blank=False)
+    national_id = models.IntegerField(unique=True, blank=False)
+    phone_number = PhoneNumber(max_length=15, blank=False, unique=True)
+    pin = models.CharField(max_length=128, unique=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, blank=True)
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, blank=True, related_name='waiters')
+
+    def set_pin(self, raw_pin=None):
+        if raw_pin:
+            self.pin = raw_pin
+        if not is_hashed(self.pin):
+            self.pin = make_password(self.pin)
+
+    def check_pin(self, raw_pin):
+        return check_password(raw_pin, self.pin)
+
+    @classmethod
+    def get(cls, raw_pin=None, restaurant=None, id=None):
+        waiters = cls.objects.filter(restaurant=restaurant)
+        if id:
+            if waiters:
+                return waiters.filter(id=id).first()
+            else:
+                return cls.objects.filter(id=id).first()
+        for waiter in waiters:
+            if waiter and waiter.check_pin(raw_pin):
+                return waiter
+        return None
+
+    def get_orders(self, filter_by='all', lookback_period=24):
+        if filter_by == 'paid':
+            return self.paid_orders(lookback_period=lookback_period)
+        if filter_by == 'pending':
+            return self.pending_orders(lookback_period=lookback_period)
+        return self.all_orders(lookback_period=lookback_period)
+
+    def all_orders(self, lookback_period=24):
+        return self.orders.all()
+
+    def pending_orders(self, lookback_period=24):
+        return self.all_orders().filter(paid=False)
+
+    def paid_orders(self, lookback_period=24):
+        return self.all_orders().filter(paid=True)
+
+    def save(self, *args, **kwargs):
+        self.set_pin()
+        super().save(*args, **kwargs)
 

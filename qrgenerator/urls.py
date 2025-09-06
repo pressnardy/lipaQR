@@ -32,3 +32,4 @@ urlpatterns = [
     path("ads", views.ads, name='ads'),
 ]
 
+

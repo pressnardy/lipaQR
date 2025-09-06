@@ -1,0 +1,67 @@
+.form-wrapper {
+    width: 400px;
+    box-sizing: border-box;
+    max-width: 99vw;
+}
+
+.waiter-details {
+    width: 100%;
+    padding: 10px 0px;
+    box-sizing: border-box;
+    margin: 0px;
+    border: none;
+}
+.form-title, .waiter-name {
+    text-transform: uppercase;
+    font-weight: bold;
+    height: fit-content;
+    margin-bottom: 10px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 20px;
+    
+}
+
+.svg-edit {
+    margin: 0px;
+}
+
+.waiter-orders {
+    width: 100%;
+}
+.waiter-orders-top {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.waiter-order-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+.orders-filter {
+    padding: 5px 10px;
+}
+
+.waiter-orders-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+}
+
+.order-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}

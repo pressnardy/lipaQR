@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('menus/', include('menus.urls')),
     path('', include('qrgenerator.urls')),
+    path('waiters/', include('waiters.urls')),
     
 ]
 

@@ -4,7 +4,9 @@ import django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'lipaqr.settings')
 django.setup()
 
-from qrgenerator.models import QrImage
+from menus.models import Waiter
 
-newImg = QrImage.add(2, 4)
-print(newImg)
+waiters = Waiter.objects.all()
+for waiter in waiters:
+    print(waiter.all_orders())
+

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Waiter</title>
+    <link rel="stylesheet" href="{% static 'qrgenerator/register.css' %}">
+</head>
+<body>
+    <section class="registration">
+        <div class="registration-nav">
+            <div>
+                <a class="back" href="{% url 'waiters:waiters' %}">
+                    <svg fill="currentColor" height="22" viewBox="0 0 22 22" width="22" 
+                    xmlns="http://www.w3.org/2000/svg"><path 
+                    class="back-arrow-path" 
+                    d="M15.75 4H13L6 11L13 18H15.75L8.75 11L15.75 4Z"></path>
+                </svg>
+                Back
+            </a>                
+            </div>
+        </div>
+        <div>
+            {% if message %}
+            <div class="message-success" style="color: green;">{{message}}</div>
+            {% endif %}
+            {% if errors %}
+            {% for field, errors in errors%}
+            <div class="form-errors" style="color: red;">
+                {{ field }}: 
+                {% for error in errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+        <div class="form-wrapper">
+            <div class="form-title"><h1>Waiter Details</h1></div>
+            <form action="" class="form-register" method="post">
+                {% csrf_token %}
+                <div class="input-wrapper"><div class="label">WAITER NAME</div>
+                    <input type="text" class="form-input" id="restaurant-name" name="name" placeholder="Waiter Name" required>
+                </div>
+                <div class="input-wrapper"><div class="label">NATIONAL ID</div>
+                    <input type="number" class="form-input" id="restaurant-location" name="national_id" placeholder="National ID" required>
+                </div>
+                <div class="input-wrapper"><div class="label">PHONE</div>
+                    <input type="tel" class="form-input" id="waiter_phone" name="phone_number" placeholder="phone number" required>
+                </div>
+                <div class="input-wrapper"><div class="label">PIN NUMBER</div>
+                    <input maxlength="4" type="password" class="form-input" id="waiter_pin" name="pin" Placeholder="PIN" required>
+                </div>
+                <br>
+                <br>
+                <div class="input-wrapper">
+                    <button type="submit" class="button-register" id="button-register" value="Register">Submit</button>
+                </div>
+            </form>
+        </div>
+    </section>
+</body>
+</html>

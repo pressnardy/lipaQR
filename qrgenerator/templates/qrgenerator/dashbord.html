@@ -11,9 +11,11 @@
     <link rel="stylesheet" href="{% static 'qrgenerator/workspace.css' %}">
     <link rel="stylesheet" href="{% static 'qrgenerator/stats.css' %}">
     <link rel="stylesheet" href="{% static 'qrgenerator/print.css' %}">
-        <link rel="stylesheet" href="{% static 'qrgenerator/dashbord_mobile.css' %}">
+    <link rel="stylesheet" href="{% static 'qrgenerator/dashbord_mobile.css' %}">
+    {% block specific_css %}{% endblock %}
     <script defer src="{% static 'qrgenerator/scripts/incomings.js' %}"></script>
     <script defer src="{% static 'qrgenerator/scripts/validations.js' %}"></script>
+    {% block specific_js %}{% endblock %}
 </head>
 <body>
 <div style="display: none;"><a id="incoming-url" href="{% url 'qrgenerator:new_orders' %}"></a></div>
@@ -76,6 +78,12 @@
                 <div class="menu-left-item">
                     <a href="{% url 'qrgenerator:paid' %}">Paid
                         <span id="incoming-paid" class="incoming">0</span>
+                    </a>
+                </div>
+                {% endblock %}
+                {% block waiter %}
+                <div class="menu-left-item">
+                    <a href="{% url 'waiters:waiters_dash' %}">Waiters
                     </a>
                 </div>
                 {% endblock %}

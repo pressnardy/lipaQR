@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'menus',
     'mpesa',
     'qrgenerator',
+    'waiters',
 ]
 
 MIDDLEWARE = [

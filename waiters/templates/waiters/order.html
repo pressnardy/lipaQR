@@ -1,0 +1,62 @@
+{% extends 'waiters/menu.html' %}
+{% block categories %}{% endblock %}
+{% block main_section %}
+<div class="flex-center-col">
+<form id="place-order-form" class="order-form" action="{% url 'waiters:place_order'%}" method="post">
+    {% csrf_token %}
+    <div>
+        <label class="form-label">Reference Number:
+        <input id="reference_number" name="reference_number" value="{{ summary.reference_number }}" class="reference_number readonly-input " readonly>
+        </label>
+    </div>
+    <div class="display-none">
+        <label> Table Number:
+        <input id="table-number" name="table_number" value="{{ summary.table_number }}" class="table_number" readonly>
+        </label>
+    </div>
+    <div>
+        <label class="">Total Amount:
+        <input id="total-amount" name="total_amount" value="KES: {{ summary.total_amount }}" class="total-amount readonly-input" readonly>
+        </label>
+    </div>
+    <div class="">
+        <span id="order-items-title">Order Items</span>
+    </div>
+    {% for item in valid_items %}
+    <div class="item-quantity order-item" id="item-{{ item.item_id }}">
+        <div class="item-name capitalize bold hide" id="item-{{ item.item_id }}-name">{{ item.item_name }}</div>
+        <!-- <div class="item-price">Unit Price: -->
+            <!-- <span class="price" id="item-{{ item.item_id }}-price">{{ item.item_price }}</span> -->
+        <!-- </div> -->
+        <div class="order-item-total capitalize">{{ item.item_name }}
+            <span class="total" id="item-{{ item.item_id }}-total">KES: {{ item.item_total }}</span>
+        </div>
+        <div class="buttons-wrapper hide">
+            <div class="quantity-label">Quantity</div>
+            <div class="quantity-wrapper">
+                <button type="button" class="quantity-button reduce-button" id="item-{{ item.item_id }}-reduce">-</button>
+                <input class="readonly-input quantity-input" id="item-{{ item.item_id }}-quantity" name="{{ item.item_id }}" value="{{ item.item_quantity }}" min="0" readonly>
+                <button type="button" class="quantity-button add-button" id="item-{{ item.item_id }}-increment">+</button>
+            </div>
+        </div>
+        <br>
+    </div>
+    {% endfor %}
+    <br>
+    <div class="pay-wrapper">
+        <div>  
+        <label class="">Enter PIN:
+        <input type="password" id="waiter-pin" name="waiter_pin" class="form-input" required>
+        </label>
+        </div>
+        <div>
+        <button id="wiater-order" class="submit-button" type="submit">Complete</button>
+        </div>
+    </div>
+</form>
+</div>
+{% endblock %}
+
+
+
+

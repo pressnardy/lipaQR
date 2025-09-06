@@ -24,11 +24,13 @@ body {
 }
 
 .page-heading {
-    padding:0 40px;
+    padding:0 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
+
+section.page-heading {}
 
 .page-title {
     display: flex;
@@ -38,6 +40,7 @@ body {
     white-space: nowrap;
     gap: 20px;
     width: 60%;
+    width: 100%;
 }
 
 .lipa-qr {
@@ -54,7 +57,7 @@ span.location {
 
 .restaurant-name {
     padding: 10px;
-    /* text-transform: capitalize; */
+    font-weight: bold;
 }
 
 .dashboard {
@@ -77,6 +80,14 @@ span.location {
     justify-content: center;
 }
 
+.qr-code {
+    max-width: 400px;
+}
+
+.qr-code > img {
+    width: 100%;
+}
+
 h3 {
     text-transform: capitalize;
 }
@@ -96,7 +107,19 @@ a {
     color: inherit;
 }
 
-
+.account-wrapper {
+    width: 100%;
+    max-width: 100vw;
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    height: fit-content;
+    height: 150px;
+    padding-bottom: 20px
+}
 @media screen and (max-width: 730px) {
     .page-heading {
         flex-direction: column;
@@ -113,5 +136,17 @@ a {
     nav {
         min-width: fit-content;
         box-sizing: border-box;
+    }
+}
+
+@media screen and (max-width: 400px) {
+
+    .qr-code {
+        max-width: 320px;
+    }
+
+    .qr-code > img {
+        max-width: 320px;
+        width: 100%;
     }
 }

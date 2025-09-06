@@ -73,6 +73,9 @@
     .main-section-left {
         padding: 0 10px;
         background: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 }
 

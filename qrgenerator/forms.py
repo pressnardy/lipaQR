@@ -46,7 +46,7 @@ class EditItemForm(forms.ModelForm):
                 attrs={'name': 'available', 'id': 'available', 'class': 'form-input'}
             ),
         }
-        
+
 class RegistrationForm(UserCreationForm):
     class Meta:
         model = User
