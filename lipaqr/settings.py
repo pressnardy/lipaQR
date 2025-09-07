@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'mpesa',
     'qrgenerator',
     'waiters',
+    'admins',
 ]
 
 MIDDLEWARE = [

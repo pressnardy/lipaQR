@@ -53,7 +53,9 @@
         </div>
 </section>
 <!-- <div class="restaurant-mobile">{{ restaurant.name}} {{restaurant.location}}</div> -->
+
 <section class="main-section">
+    {% block far_left %}
     <div class="main-section-left bg-light-gray np">
         <div class="menu-left bg-white">
             <div class="menu-left-first">
@@ -88,12 +90,15 @@
                 </div>
                 {% endblock %}
             </div>
+            {% block logout %}
             <div class="menu-left-item mi">
                 <div class="dash-logout">
                     <a href="{% url 'qrgenerator:logout' %}"><div>Log Out</div></a>
                 </div>
             </div>
+            {% endblock %}
         </div>
+        {% endblock %}
         {% block menu_elements %}
         <!-- <div class="menu-elements bg-white">
             <div class="elements-top">
@@ -169,6 +174,7 @@
         </div>
         {% endblock %}
     </div>
+    {% block stats %}
     <div class="stats np">
         <div class="stats-item">
             <div class="stats-item-title">Today's Sales</div>
@@ -222,6 +228,7 @@
             </div>
         </div>
     </div>
+    {% endblock %}
 </section>
 </body>
 </html>

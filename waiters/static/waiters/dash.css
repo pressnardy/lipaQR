@@ -65,3 +65,13 @@
     align-items: center;
     justify-content: center;
 }
+
+.waiter-totals {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    font-weight: bold;
+
+}

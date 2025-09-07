@@ -1,0 +1,12 @@
+.waiters {
+    width: fit-content;
+    
+}
+.waiter {
+    padding: 5px;
+    margin: 0px;
+    margin-bottom: 5px;
+    border: 1px solid var(--light-purple);
+}
+
+

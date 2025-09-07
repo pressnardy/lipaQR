@@ -133,7 +133,8 @@ class Order(models.Model):
     paid = models.BooleanField(default=False)
     new = models.BooleanField(default=True)
     created_by = models.ForeignKey('Waiter', on_delete=models.SET_NULL, null=True, related_name='orders')
-
+    category = models.CharField(max_length=20, choices=[('drinks', 'drinks'), ('food', 'food')], null=True, default=None)
+    
     @classmethod
     def get(cls, unique_value):
         if isinstance(unique_value, int):
@@ -290,6 +291,13 @@ class Waiter(models.Model):
             return self.pending_orders(lookback_period=lookback_period)
         return self.all_orders(lookback_period=lookback_period)
 
+    def totals(self, filter_by='all', lookback_period=24):
+        orders = self.get_orders(filter_by=filter_by, lookback_period=lookback_period)
+        if not orders:
+            return 0
+        total = sum(order.total_amount for order in orders)
+        return total
+    
     def all_orders(self, lookback_period=24):
         return self.orders.all()
 

@@ -149,7 +149,7 @@ body {
     flex-direction: column;
     justify-content: space-between;
     /* border: 1px solid rebeccapurple; */
-    margin-right: 4px;
+    /* margin-right: 4px; */
     padding-right: 10px;
     border-radius: 0 5px 5px 0;
     padding-top: 10px;
@@ -208,6 +208,7 @@ body {
     justify-content: flex-start;
     width: 260px;
     border-radius: 5px;
+    height: 100%;
 
 }
 
@@ -230,6 +231,7 @@ body {
 .elements-title {
     padding-bottom: 2px;
     color: var(--faded-black);
+    text-transform:capitalize;
     
 }
 

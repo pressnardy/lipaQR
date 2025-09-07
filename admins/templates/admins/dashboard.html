@@ -1,0 +1,135 @@
+{% extends 'qrgenerator/dashbord.html' %}
+
+{% load static %}
+{% block specific_css %}
+<link rel="stylesheet" href="{% static 'admins/index.css' %}">
+{% endblock %}
+{% block far_left%}
+<div class="main-section-left bg-light-gray np">
+    <div class="menu-left bg-white">
+        <div class="menu-left-first waiters">
+            <div>
+                <a href="{% url 'admins:section' section %}"><h5>Orders</h5></a>
+            </div>
+            <h5>Waiters</h5>
+            {% for waiter in waiters %}
+            <div class="menu-left-item waiter">
+                <a href="{% url 'admins:view_waiter' section waiter.id %}">{{ waiter.name }} - {{ waiter.phone_number }}</a>
+            </div>
+            {% endfor %}
+        </div>
+        {% block logout %}
+        <div class="menu-left-item mi">
+            <div class="dash-logout">
+                <a href="{% url 'qrgenerator:logout' %}"><div>Log Out</div></a>
+            </div>
+        </div>
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}
+
+{% block menu_elements %}
+<div class="menu-elements bg-white">
+    <div class="elements-top">
+        {% if display_waiter %}
+        <div class="elements-title">{{ display_waiter.name }} Orders</div>
+        {% else %}
+        <div class="elements-title">Incomming Orders</div>
+        {% endif %}
+    </div>
+    <div class="elements-wrapper" id="">
+        {% if display_order %}
+        <a id="display-href" href="{% url 'admins:view_order' section display_order.order_id %}">
+        <div class="element-highlight {% if display_order.new %}is-new{% endif %}">
+            <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" 
+                xmlns="http://www.w3.org/2000/svg" stroke="#663399" stroke-width="0.36"
+                transform="rotate(0)">
+                <path d="M9.39862 4.32752C9.69152 4.03463 10.1664 4.03463 10.4593 4.32752L16.8232 10.6915C17.5067 11.3749 17.5067 12.4829 16.8232 13.1664L10.4593 19.5303C10.1664 19.8232 9.69152 19.8232 9.39863 19.5303C9.10573 19.2374 9.10573 18.7625 9.39863 18.4697L15.7626 12.1057C15.8602 12.0081 15.8602 11.8498 15.7626 11.7521L9.39863 5.38818C9.10573 5.09529 9.10573 4.62041 9.39862 4.32752Z" fill="rebeccapurple"/>
+            </svg>
+            <span class="item-name item-property">
+            {{ display_order.phone_number }} | KES: {{ display_order.total_amount }}  
+            </span>
+        </div>
+        </a>
+        {% endif %}
+        {% if not display_waiter %}
+        <div class="elements-wrapper" id="incomings-container">
+        
+        </div>
+        {% else %}
+        {% for order in orders %}
+        <a id="display-href" href="{% url 'admins:view_order' section=section order_id=order.order_id %}">
+        <div class="element-highlight {% if display_order.new %}is-new{% endif %}">
+            <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" 
+                xmlns="http://www.w3.org/2000/svg" stroke="#663399" stroke-width="0.36"
+                transform="rotate(0)">
+                <path d="M9.39862 4.32752C9.69152 4.03463 10.1664 4.03463 10.4593 4.32752L16.8232 10.6915C17.5067 11.3749 17.5067 12.4829 16.8232 13.1664L10.4593 19.5303C10.1664 19.8232 9.69152 19.8232 9.39863 19.5303C9.10573 19.2374 9.10573 18.7625 9.39863 18.4697L15.7626 12.1057C15.8602 12.0081 15.8602 11.8498 15.7626 11.7521L9.39863 5.38818C9.10573 5.09529 9.10573 4.62041 9.39862 4.32752Z" fill="rebeccapurple"/>
+            </svg>
+            <span class="item-name item-property">
+            {{ display_order.phone_number }} | KES: {{ display_order.total_amount }}  
+            </span>
+        </div>
+        </a>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block workspace %}
+<!-- <div class="workspace"> -->
+    <div class="form-wrapper">
+        <div class="form-title"><h3>Order Details</h3></div>
+        <div class="order-summary">
+            {% if display_order %}
+            <div class="width-250">
+                <div class="input-wrapper">
+                    <div class="label">Reference. No:</div>
+                    <div class="form-input">{{ display_order.reference_number }}</div>
+                </div>
+                <div class="input-wrapper">
+                    <div class="label">Phone Number:</div>
+                    <div class="form-input">{{ display_order.phone_number }}</div>
+                </div>
+                <div class="input-wrapper"><div class="label">Total:</div>
+                    <div class="form-input">KES: {{ display_order.total_amount }}</div>
+                </div>
+                <div class="input-wrapper">
+                    <div class="label">Status:</div>
+                    <div class="status">{% if display_order.paid %}Paid{% endif %}
+                        <div class="info-box">Set the order status to paid</div>
+                        <form method="POST" action="" class="paid-btn-wrapper">
+                            {% csrf_token %}
+                            <input type="hidden" value="1">
+                            <button type="submit" class="mark-paid">PRINT</button>
+                            <!-- <div class="info-box">set the order status to paid</div> -->
+                        </form>
+                    </div>
+                </div>
+                <br>
+            </div>
+            <div class="width-250 padding-left-10">
+            <div class="label items-title">Items</div>
+            <ol>
+                {% for item in display_order.items_ordered %}
+                <li>
+                    <div class="item-wrapper">
+                        <div class="item-description">{{ item.item.name }}</div>
+                        <div class="item-total">KES:{{ item.total }}</div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ol>
+            </div>
+            {% elif order_not_found %}
+            <p>Order not Found check the details and try again</p>
+            {% else %}
+            <p>No Orders at the moment</p>
+            {% endif %}
+        </div>
+    <!-- </div> -->
+</div>
+{% endblock %}
+
+

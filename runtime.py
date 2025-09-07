@@ -8,5 +8,5 @@ from menus.models import Waiter
 
 waiters = Waiter.objects.all()
 for waiter in waiters:
-    print(waiter.all_orders())
+    print(waiter.totals())
 

@@ -92,4 +92,3 @@ def login_tester(request, username='pressnardy@gmail.com', password='zade12345')
 
 def ads(request):
     return render(request, 'menus/ads.html')
-
