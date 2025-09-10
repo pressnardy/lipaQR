@@ -31,19 +31,37 @@ def index(request):
     return login_view(request)
 
 
+def categorize(request, table_number):
+    restaurant = get_restaurant(request)
+    if request.method == 'POST':
+        category = request.POST.get('category')
+        table_number = request.POST.get('table_number')
+        if category and table_number:
+            return get_menu(request)
+    return render(request, 'waiters/categories.html', {'table_number': table_number, 'restaurant': restaurant})
+
+
+def get_table(request):
+    table_number = request.POST.get('table_number')
+    if table_number:
+        return redirect('waiters:categorize', table_number=table_number)
+    return render(request, 'waiters/get_table.html')
+
+
 def get_menu(request):
     restaurant = get_restaurant(request)
-    if request.method == 'GET':
-        return render(request, 'waiters/create_order.html')
     menu = restaurant.menu
-    table_number = request.POST.get('table_number')
     category = request.POST.get('category')
+    table_number = request.POST.get('table_number')
+    if not table_number:
+        raise ValueError('missing table number')
     if category:
-        menu = restaurant.menu_by_category(category)
+        menu = restaurant.menu_by_category(category)['items']
     context = {
         'restaurant': restaurant,
         'table_number': table_number,
         'menu': menu,
+        'category': category,
     }
     return render(request, 'waiters/menu.html', context)
     
@@ -78,13 +96,13 @@ def place_order(request):
     form.instance.created_by = waiter
     form.instance.phone_number = waiter.phone_number
     order = form.save()
-    print(order)
+    
     items = util.get_ordered_items(request.POST)
     pending = util.save_to_pending(items, order=order)
+    # return HttpResponse(items)
     if pending:
         return order_placed(request)
     
-
 
 def order_placed(request):
     return render(request, 'waiters/order_placed.html')

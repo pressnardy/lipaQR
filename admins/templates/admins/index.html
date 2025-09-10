@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="{% static 'qrgenerator/svg/logo.svg' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=" {% static 'qrgenerator/qr_images.css' %} ">
+    <link rel="stylesheet" href="{% static 'admins/logins.css' %}">
+    <title>Admins</title>
+</head>
+<body>
+<section class="page-heading">
+    <div class="page-title">
+        <div class="logo">
+            <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="2" width="28" height="28" fill="rebeccapurple" />
+                <rect x="7" y="7" width="18" height="18" fill="white" />
+                <rect x="11" y="11" width="10" height="10" fill="rebeccapurple" />
+            </svg>
+        </div>
+        <div class="lipa-qr"><h1>Glance QR</h1></div>
+    </div>
+</section>
+<section class="logins-section">     
+<div class="logins-wrapper">
+    <div class="logins-title"><h3 class="logins-title">LOGIN</h3></div>
+    <div class="logins">
+        <div>
+            <a href="{% url 'admins:food_login' %}" class="section food">FOOD</a>
+        </div>
+        <div>
+            <a href="{% url 'admins:drinks_login' %}" class="section drinks">DRINKS</a>
+        </div>
+        <div>
+            <a href="{% url 'admins:waiters_login' %}" class="section admin">WAITERS</a>
+        </div>
+        <div>
+            <a href="{% url 'admins:dashboard_login' %}" class="section waiters">ADMIN</a>
+        </div>
+    </div>
+</div>
+</section>
+</body>
+</html>

@@ -19,13 +19,15 @@ class AddRestaurantForm(forms.ModelForm):
 class AddItemForm(forms.ModelForm):
     class Meta:
         model = Item
-        fields = ['name', 'unit', 'description', 'available', 'unit_price', 'image']
+        fields = ['name', 'unit', 'description', 'available', 'unit_price', 'image', 'category']
         widgets = {
             'name': forms.TextInput(attrs={'name': 'name', 'id': 'name', 'class': 'form-input', 'placeholder': 'Item Name'}),
             'unit': forms.TextInput(attrs={'name': 'unit', 'id': 'unit', 'class': 'form-input', 'placeholder': 'Unit'}),
             'description': forms.Textarea(attrs={'name': 'description', 'id': 'description', 'class': 'form-input', 'placeholder': 'Description'}),
             'unit_price': forms.NumberInput(attrs={'name': 'unit_price', 'id': 'unit_price', 'class': 'form-input', 'placeholder': 'Unit Price'}),
             'image': forms.ClearableFileInput(attrs={'name': 'image', 'id': 'image'}),
+            'category': forms.TextInput(attrs={'name': 'category', 'id': 'category', 'class': 'form-input',}),
+
         }
 
 class EditItemForm(forms.ModelForm):

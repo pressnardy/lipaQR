@@ -38,3 +38,7 @@ p {
     background: rebeccapurple;
     color: white;
 }
+
+.message-success {
+    color: green;
+}

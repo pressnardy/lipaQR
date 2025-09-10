@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, minimum-scale=1, 
+    width=device-width, interactive-widget=resizes-content user-scalable=false">
+    <link rel="icon" type="image/x-icon" href="{% static 'qrgenerator/svg/logo.svg' %}">
+    <link href="{% static 'qrgenerator/accounts.css' %}" rel="stylesheet">
+    <link href="{% static 'menus/index.css' %}" rel="stylesheet">
+    <link href="{% static 'menus/order.css' %}" rel="stylesheet">
+    <link href="{% static 'menus/order_mobile.css' %}" rel="stylesheet">
+    <link href="{% static 'waiters/menu.css' %}" rel="stylesheet">
+    {% block specific_css %}{% endblock %}
+    <title>Glance QR</title>
+    <script defer src="{% static 'scripts/index.js' %}"></script>
+</head>
+<body>
+    <section class="page-header np">
+        <div class="header-top">
+            <div class="page-title">
+                <div class="logo">
+                    <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="2" y="2" width="28" height="28" fill="rebeccapurple" />
+                        <rect x="7" y="7" width="18" height="18" fill="white" />
+                        <rect x="11" y="11" width="10" height="10" fill="rebeccapurple" />
+                    </svg>
+                </div>
+                <div>
+                <span id="lipa">Glance</span> <span id="q">Q</span><span>R</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% block body %}
+    <section class="flex-center flex-column restaurant-details">
+        <div class="flex-center title-adjust">
+            <div class="restaurant-name">{{ restaurant.name }}</div>
+            <div class="restaurant-name">{{ restaurant.location }}</div>
+        </div>
+        <div class="table">TABLE <span class="">{{ table_number }}</span></div>
+    </section>
+    {% block categories %}
+    <section class="categories-section">
+        <form id="category-form" class="categories" method="post" action="{% url 'waiters:get_menu' %}">
+            {%csrf_token %}
+            <input name="category" id="category" type="hidden" value="" readonly>
+            <input name="table_number" type="hidden" value="{{ table_number }}" readonly>
+        <div class="cat drinks" id="drinks">
+            Drinks
+        </div>
+        <div class="cat food" id="food">Food</div>
+        </form>
+    </section>        
+    {% endblock %}
+    {% endblock %}
+</body>
+</html>
+
+
+

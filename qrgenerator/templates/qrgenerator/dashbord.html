@@ -12,12 +12,16 @@
     <link rel="stylesheet" href="{% static 'qrgenerator/stats.css' %}">
     <link rel="stylesheet" href="{% static 'qrgenerator/print.css' %}">
     <link rel="stylesheet" href="{% static 'qrgenerator/dashbord_mobile.css' %}">
+    <script type="module" src="{% static 'scripts/receiptPrinter.js' %}"></script>
     {% block specific_css %}{% endblock %}
     <script defer src="{% static 'qrgenerator/scripts/incomings.js' %}"></script>
     <script defer src="{% static 'qrgenerator/scripts/validations.js' %}"></script>
     {% block specific_js %}{% endblock %}
 </head>
 <body>
+{% if order %}
+<a id="print-order-url" href="{% url 'menus:print_order' order.order_id %}" style="display: none;"></a>
+{% endif %}
 <div style="display: none;"><a id="incoming-url" href="{% url 'qrgenerator:new_orders' %}"></a></div>
 <section class="page-header np">
         <div class="header-top">
@@ -38,11 +42,13 @@
                 {{restaurant.name.capitalize }} {{restaurant.location.capitalize}}
                 {% endif %}
             </div>
+            {% block getqr %}
             <div class="header-right">
                 <a href="{% url 'qrgenerator:get_qrs' %}">
                     <div class="gen-codes">Get QRs</div>
                 </a>
             </div>
+            {% endblock %}
         </div>
         <div class="header-bottom mv">
             <div>
@@ -114,6 +120,7 @@
         {% endblock %}
     </div>
     <div class="workspace">
+        {% block search %}
         <div id="search-wrapper" class="np">
             <form action="{% url 'qrgenerator:search_order' %}" method="post" id="search-form">
                 {% csrf_token %}
@@ -123,6 +130,7 @@
                 <button type="submit" id="button-search">Go</button>
             </form>
         </div>
+        {% endblock %}
         {% block workspace %}
         <div class="form-wrapper">
             <div class="form-title"><h3>Order Details</h3></div>
@@ -175,6 +183,7 @@
         {% endblock %}
     </div>
     {% block stats %}
+    <div class="stats-wrapper">
     <div class="stats np">
         <div class="stats-item">
             <div class="stats-item-title">Today's Sales</div>
@@ -227,6 +236,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
     {% endblock %}
 </section>

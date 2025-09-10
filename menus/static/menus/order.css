@@ -73,6 +73,11 @@ input:focus {
     margin-top: 10px;
 }
 
+input#table-number {
+    /* text-align: center; */
+    padding-left: 10px
+}
+
 #order-items-title {
     text-transform: uppercase;
     font-size: 14px;

@@ -1,0 +1,77 @@
+.cat {
+    width: 130px;
+    height: 40px;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    border-radius: 30px;
+}
+.page-title {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 20px;
+
+}
+.categories-section {
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+#category-form {
+    height: 100%;
+    width: 80%;
+    border: 2px solid var(--faded-black);
+    border-radius: 30px;
+    min-width: 320px;
+}
+.restaurant-details {
+    border: none;
+}
+
+.menu-item {
+    max-width: 240px;
+}
+
+.item-text {
+    max-width: 200px;
+    padding: 0px 0px 5px 0px;
+    border-radius: 10px;
+    
+}
+
+.item-details {
+    padding: 10px 0px;
+}
+
+.totals {
+    padding: 0px;
+}
+.item-name {
+    font-weight: bold;
+    text-transform: uppercase;
+    padding-left: 10px;
+}
+.restaurant-menu {
+    padding-top: 0px;
+}
+.item-price {
+    font-size: 14px;
+}
+.menu-form {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    justify-content: center;
+    
+}
+.preview-section {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+

@@ -58,8 +58,8 @@ class Restaurant(models.Model):
     
     def menu_by_category(self, category):
         items = self.menu.filter(category=category)
-        menu = list(items) + [i for i in self.menu if i not in items]
-        return menu
+        others =  [i for i in self.menu if i not in items]
+        return {'items': items, 'others': others}
     
     def in_menu(self, item_name=None, item_id=None):
         if item_name:
@@ -269,7 +269,8 @@ class Waiter(models.Model):
             self.pin = make_password(self.pin)
 
     def check_pin(self, raw_pin):
-        return check_password(raw_pin, self.pin)
+        pin = raw_pin
+        return check_password(pin, self.pin)
 
     @classmethod
     def get(cls, raw_pin=None, restaurant=None, id=None):

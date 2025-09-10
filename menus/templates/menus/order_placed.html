@@ -8,11 +8,12 @@
     <title>{{ restaurant}}</title>
 </head>
 <body>
+    <a id="auto-redirect-url" style="display: none;" href="{% url 'menus:get_menu' restautant.restaurant_id table_number %}"></a>
     {% block categories %}{% endblock %}
     {% block message_section %}
     <section class="message-section">
-        <h2 class="message-title">Success</h2>
-        <p class="message">Your order has been successfully placed!</p>
+        <h2 class="message-success">Success</h2>
+        <p class="message-success">Your order has been successfully placed!</p>
         <div class="message"></div>
     </section>
     {% endblock %}

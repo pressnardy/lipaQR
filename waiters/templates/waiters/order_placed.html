@@ -1,1 +1,17 @@
-order placed
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'menus/messages.css' %}">
+    <script src="{% static 'scripts/autoRedirect.js' %}"></script>
+    <title>Order Placed</title>
+</head>
+<body>
+    <a id="auto-redirect-url" style="display: none;" href="{% url 'waiters:get_table' %}"></a>
+    <section class="message-section" style="padding-top: 200px">
+        <div class="message-success" style="color: green; font-size: 32px">Order Placed</div>
+    </section>
+</body>
+</html>

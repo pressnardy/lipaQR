@@ -17,12 +17,15 @@ def get_menu(request, restaurant_id, table_number):
     if not restaurant:
         return HttpResponse("Restaurant not found. Please scan again.", status=400)
     menu = restaurant.menu
+    others = None
     if category := request.POST.get('category'):
-        menu = restaurant.menu_by_category(category)
+        results = restaurant.menu_by_category(category)
+        menu, others = results['items'], results['others']
     context = {
         'restaurant': restaurant,
         'table_number': table_number,
         'menu': menu,
+        'others': others or None,
     }
     return render(request, 'menus/menu.html', context)
         

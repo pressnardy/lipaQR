@@ -4,9 +4,16 @@
   {% load static %}
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="{% static 'menus/messages.css' %}">
 </head>
 <body>
-  <img src="{% static 'images/loading.gif' %}">
+  <!-- <img src="{% static 'images/loading.gif' %}"> -->
+  <a id="auto-redirect-url" style="display: none;" href=""></a>
+  <section class="messages-section">
+    <div class="message-success">
+      processing
+    </div>
+  </section>
 
 </body>
 </html>

@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views
+from . import views, print_order
 
 
 app_name = "menus"
@@ -13,5 +13,6 @@ urlpatterns = [
     path("<int:restaurant_id>/<int:table_number>/<str:reference_number>/pay_order/", views.pay_order, name="pay_order"),
     path("<int:restaurant_id>/<int:table_number>/pay_order/<str:reference_number>/", views.payment_success, name="payment_success"),
     path("order_placed/", views.order_placed, name="order_placed"),
+    path('print_order/<str:order_id>/', print_order.get_order, name='print_order'),
 ]
 

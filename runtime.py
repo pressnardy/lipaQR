@@ -8,5 +8,5 @@ from menus.models import Waiter
 
 waiters = Waiter.objects.all()
 for waiter in waiters:
-    print(waiter.totals())
+    print(waiter.set_pin(1234))
 

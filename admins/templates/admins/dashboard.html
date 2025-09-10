@@ -4,24 +4,30 @@
 {% block specific_css %}
 <link rel="stylesheet" href="{% static 'admins/index.css' %}">
 {% endblock %}
+{% block getqr %}{% endblock %}
 {% block far_left%}
 <div class="main-section-left bg-light-gray np">
     <div class="menu-left bg-white">
         <div class="menu-left-first waiters">
-            <div>
-                <a href="{% url 'admins:section' section %}"><h5>Orders</h5></a>
+            <div class="orders-title">
+                <a href="{% url 'admins:section' section %}"><h5 class="orders-h">Orders</h5></a>
             </div>
-            <h5>Waiters</h5>
+            <div class="waiters-wrapper">
+            <h5 class="waiters-h">Waiters</h5>
             {% for waiter in waiters %}
             <div class="menu-left-item waiter">
-                <a href="{% url 'admins:view_waiter' section waiter.id %}">{{ waiter.name }} - {{ waiter.phone_number }}</a>
+                <a href="{% url 'admins:view_waiter' section waiter.id %}">{{ waiter.name }}</a>
             </div>
             {% endfor %}
+            </div>
+        </div>
+        <div class="waiter-wrapper">
+            
         </div>
         {% block logout %}
         <div class="menu-left-item mi">
             <div class="dash-logout">
-                <a href="{% url 'qrgenerator:logout' %}"><div>Log Out</div></a>
+                <a href="{% url 'qrgenerator:logout' %}"><div class="logout-h">Log Out</div></a>
             </div>
         </div>
         {% endblock %}
@@ -59,6 +65,7 @@
         </div>
         {% else %}
         {% for order in orders %}
+        {% if order.order_id != display_order.order_id %}
         <a id="display-href" href="{% url 'admins:view_order' section=section order_id=order.order_id %}">
         <div class="element-highlight {% if display_order.new %}is-new{% endif %}">
             <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" 
@@ -67,10 +74,11 @@
                 <path d="M9.39862 4.32752C9.69152 4.03463 10.1664 4.03463 10.4593 4.32752L16.8232 10.6915C17.5067 11.3749 17.5067 12.4829 16.8232 13.1664L10.4593 19.5303C10.1664 19.8232 9.69152 19.8232 9.39863 19.5303C9.10573 19.2374 9.10573 18.7625 9.39863 18.4697L15.7626 12.1057C15.8602 12.0081 15.8602 11.8498 15.7626 11.7521L9.39863 5.38818C9.10573 5.09529 9.10573 4.62041 9.39862 4.32752Z" fill="rebeccapurple"/>
             </svg>
             <span class="item-name item-property">
-            {{ display_order.phone_number }} | KES: {{ display_order.total_amount }}  
+            {{ order.phone_number }} | KES: {{ order.total_amount }}  
             </span>
         </div>
         </a>
+        {% endif %}
         {% endfor %}
         {% endif %}
     </div>

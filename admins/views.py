@@ -30,7 +30,7 @@ def get_orders_context(order_id, orders, restaurant):
 
 
 def index(request):
-    return redirect('admins:index')
+    return render(request, 'admins/index.html')
 
 
 @login_required(login_url='admins:index')
@@ -50,11 +50,15 @@ def dashboard(request, section, waiter_id=None, order_id=None):
     return render(request, 'admins/dashboard.html', context)
 
 def section(request, section):
+    # return HttpResponse(section)
     if section == 'food':
         return food(request)
     if section == 'drinks':
         return drinks(request)
-    
+    if section == 'waiters':
+        return redirect('waiters:get_table')
+    return redirect('qrgenerator:account')
+
 def food(request):
     section = 'food'
     return dashboard(request, section)
@@ -64,7 +68,9 @@ def drinks(request):
     section ='drinks'
     return dashboard(request, section)
 
-
+def waiters_section(request):
+    return redirect('waiters:get_menu')
+    
 def waiter_dashboard(request, section, waiter_id):
     return dashboard(request, section, waiter_id=waiter_id)
 

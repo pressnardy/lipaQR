@@ -101,7 +101,7 @@ def get_order_context(restaurant, valid_items, invalid_items, table_number):
 
 def get_ordered_items(post_data):
     post_data_list = [[k, v] for k, v in post_data.items()]
-    items = [{'item_id': i[0], 'item_quantity': int(i[1])} for i in post_data_list[5:-1]]
+    items = [{'item_id': i[0], 'item_quantity': int(i[1])} for i in post_data_list[4:-1]]
     print(post_data_list)
     return items
 
