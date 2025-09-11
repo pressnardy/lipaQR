@@ -63,12 +63,17 @@ def place_order(request, restaurant_id, table_number):
         # return HttpResponse(items)
         pending = util.save_to_pending(items, order=order)
         if request.POST.get('pay_later'):
-            return render(request, 'menus/order_placed.html')
+            return pay_later(request, order)
         return redirect(
             'menus:pay_order', restaurant_id=restaurant_id, table_number=table_number,
             reference_number=reference_number
         )
     return redirect('menus:get_order', restaurant_id=restaurant_id, table_number=table_number)
+
+
+def pay_later(request, order):
+    context = get_order_context(order)
+    return render(request, 'menus/order_placed.html', context)
 
 
 def pay_order(request, restaurant_id, table_number, reference_number):
