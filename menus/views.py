@@ -81,10 +81,18 @@ def pay_order(request, restaurant_id, table_number, reference_number):
             util.send_stk_push(restaurant, order, reference_number)
             return order_placed(request, order=order)
         return order_failed(request, order=order)
+        
     return render(request, 'menus/pay.html', {'order': order})
 
+
 def order_placed(request, order):
-    return render(request, 'menus/order_placed.html', {'order': order})
+    restaurant = order.restaurant
+    table_number = order.table_number
+    context = {
+        'restaurant': restaurant, 'order': order, 'table_number': table_number
+    }
+    return render(request, 'menus/order_placed.html', context)
+
 
 def order_failed(request, order):
     return render(request, 'order_failed.html', {
@@ -93,9 +101,17 @@ def order_failed(request, order):
         "order": order,
     })
 
+
 def payment_success(request, paid_order):
     return render(request, 'menus/order_success.html', {'order': paid_order})
 
 
 def payment_failed(request):
     return render(request, 'menus/payment_failed.html')
+
+
+def get_order_context(order):
+    context = {
+        'order': order, 'restaurant': order.restaurant, 'table_number': order.table_number
+    }
+    return context

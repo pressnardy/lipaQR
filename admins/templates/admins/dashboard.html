@@ -6,6 +6,7 @@
 {% endblock %}
 {% block getqr %}{% endblock %}
 {% block far_left%}
+
 <div class="main-section-left bg-light-gray np">
     <div class="menu-left bg-white">
         <div class="menu-left-first waiters">
@@ -61,9 +62,6 @@
         {% endif %}
         {% if not display_waiter %}
         <div class="elements-wrapper" id="incomings-container">
-        
-        </div>
-        {% else %}
         {% for order in orders %}
         {% if order.order_id != display_order.order_id %}
         <a id="display-href" href="{% url 'admins:view_order' section=section order_id=order.order_id %}">
@@ -80,6 +78,7 @@
         </a>
         {% endif %}
         {% endfor %}
+        </div>
         {% endif %}
     </div>
 </div>

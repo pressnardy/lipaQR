@@ -5,8 +5,8 @@
 {% block message_section %}
 
 <section class="message-section">
-    <h2 class="message-title message-error">Error</h2>
-    <p class="message">Order Unsuccessful!</p>
+    <h2 class="message-title message-error" style="color: red;">Error</h2>
+    <p class="message-error" style="color: red;">Order Unsuccessful!</p>
     <div class="message"><a href="{% url 'menus' restaurant_id table_number %}" class="retry">Retry</a></div>
 </section>
 

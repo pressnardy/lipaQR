@@ -15,13 +15,13 @@ class CreateWaiterForm(forms.ModelForm):
 class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
-        fields = ['reference_number', 'table_number',]
+        fields = ['reference_number', 'table_number', 'category']
         widgets = {
             'reference_number': forms.TextInput(attrs={'disabled': True, 'name': 'reference_number'}),
             # 'total_amount': forms.NumberInput(attrs={'disabled': True, 'name': 'total_amount'}),
             'table_number': forms.NumberInput(attrs={'disabled': True, 'name': 'table_number'}),
-            # 'phone_number': forms.TextInput(attrs={'required': True, 'name': 'phone_number'}),
+            'category': forms.TextInput(attrs={'required': True, 'name': 'category', 'type': 'hidden'}),
         }
 
-    
+
 

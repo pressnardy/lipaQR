@@ -6,7 +6,9 @@ django.setup()
 
 from menus.models import Waiter
 
-waiters = Waiter.objects.all()
-for waiter in waiters:
-    print(waiter.set_pin(1234))
+waiter = Waiter.objects.get(id=1)
+
+order = waiter.orders.all().order_by('-order_id').first()
+print(order.category)
+
 

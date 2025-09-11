@@ -285,13 +285,16 @@ class Waiter(models.Model):
                 return waiter
         return None
 
-    def get_orders(self, filter_by='all', lookback_period=24):
+    def get_orders(self, filter_by='all', section=None, lookback_period=24):
+        orders = self.all_orders(lookback_period=lookback_period)
         if filter_by == 'paid':
-            return self.paid_orders(lookback_period=lookback_period)
+            orders = self.paid_orders(lookback_period=lookback_period)
         if filter_by == 'pending':
-            return self.pending_orders(lookback_period=lookback_period)
-        return self.all_orders(lookback_period=lookback_period)
-
+            orders = self.pending_orders(lookback_period=lookback_period)
+        if section:
+            return orders.filter(category=section)
+        return orders
+    
     def totals(self, filter_by='all', lookback_period=24):
         orders = self.get_orders(filter_by=filter_by, lookback_period=lookback_period)
         if not orders:

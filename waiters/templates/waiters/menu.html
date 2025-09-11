@@ -50,6 +50,7 @@
         {% block main_section %}
         <form action="{% url 'waiters:get_order' %}" class="menu-form" method="POST">
             {% csrf_token %}
+            <input type="hidden" name="category" value="{{ category }}">
             <div style="display: none;">
                 <input type="text" id="restaurant-id" name="restaurant_id" value="{{ restaurant.restaurant_id }}">
                 <input type="number" id="table-number" name="table_number" value="{{ table_number }}">    

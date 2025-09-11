@@ -70,16 +70,20 @@ def get_order(request):
     if request.method == 'POST':
         order_details = [[k, v] for k, v in request.POST.items()]
         items = []
-        for i in order_details[3:]:
+        for i in order_details[4:]:
             if i[1].isnumeric() and int(i[1]) > 0:
                 item = {'item_id': i[0], 'item_quantity': i[1]}
                 items.append(item)
         
         restaurant_id = get_restaurant(request).restaurant_id
         table_number = request.POST.get('table_number')
+        category = request.POST.get('category')
+        if not category:
+            return HttpResponse('Error: Category missing')
         restaurant, valid_items, invalid_items = util.get_order(restaurant_id, items)
         if valid_items:
             context = util.get_order_context(restaurant, valid_items, invalid_items, table_number)
+            context['category'] = category
             return render(request, 'waiters/order.html', context)
     return get_menu(request)
 
@@ -140,11 +144,11 @@ def waiters(request):
 
 
 def view_waiter(request, waiter_id):
-    resttaurant = get_restaurant(request)
+    restaurant = get_restaurant(request)
     waiter = Waiter.get(id=waiter_id)
     context = {
         'waiter': waiter,
-        'restaurant': resttaurant,
+        'restaurant': restaurant,
     }
     return render(request, 'waiters/waiter_dash.html', context)
 

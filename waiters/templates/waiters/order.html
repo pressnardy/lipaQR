@@ -4,6 +4,7 @@
 <div class="flex-center-col">
 <form id="place-order-form" class="order-form" action="{% url 'waiters:place_order'%}" method="post">
     {% csrf_token %}
+    <input type="hidden" name="category" value="{{ category }}">
     <div>
         <label class="form-label">Reference Number:
         <input id="reference_number" name="reference_number" value="{{ summary.reference_number }}" class="reference_number readonly-input " readonly>

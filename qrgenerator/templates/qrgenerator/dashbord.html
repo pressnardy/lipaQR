@@ -22,7 +22,9 @@
 {% if order %}
 <a id="print-order-url" href="{% url 'menus:print_order' order.order_id %}" style="display: none;"></a>
 {% endif %}
+{% block incomings_url %}
 <div style="display: none;"><a id="incoming-url" href="{% url 'qrgenerator:new_orders' %}"></a></div>
+{% endblock %}   
 <section class="page-header np">
         <div class="header-top">
             <div class="page-title">
