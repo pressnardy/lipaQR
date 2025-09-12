@@ -103,7 +103,7 @@
                 </div>
                 <div class="input-wrapper">
                     <div class="label">Status:</div>
-                    <div class="status">{% if display_order.paid %}Paid{% endif %}
+                    <div class="status">{% if display_order.paid %}Paid{% else %}Pending{% endif %}
                         <div class="info-box">Set the order status to paid</div>
                         <form method="POST" action="" class="paid-btn-wrapper">
                             {% csrf_token %}
@@ -119,9 +119,9 @@
             <div class="label items-title">Items</div>
             <ol>
                 {% for item in display_order.items_ordered %}
-                <li>
+                <li class="items-li">
                     <div class="item-wrapper">
-                        <div class="item-description">{{ item.item.name }}</div>
+                        <div class="item-description">{{ item.item.name }} * {{item.quantity}}</div>
                         <div class="item-total">KES:{{ item.total }}</div>
                     </div>
                 </li>

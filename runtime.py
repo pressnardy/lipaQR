@@ -6,9 +6,8 @@ django.setup()
 
 from menus.models import Waiter
 
-waiter = Waiter.objects.get(id=1)
+waiter = Waiter.objects.get(id=2)
 
-order = waiter.orders.all().order_by('-order_id').first()
-print(order.category)
-
+order = waiter.orders.all().order_by('order_id').first()
+print(order.ordered_items.all())
 
