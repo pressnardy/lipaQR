@@ -133,6 +133,9 @@
     .active-tab {
         width: unset;
     }
-    
+
+    .page-title {
+        justify-content: space-between;
+
 }
 

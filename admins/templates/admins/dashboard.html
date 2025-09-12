@@ -60,7 +60,6 @@
         </div>
         </a>
         {% endif %}
-        {% if not display_waiter %}
         <div class="elements-wrapper" id="incomings-container">
         {% for order in orders %}
         {% if order.order_id != display_order.order_id %}
@@ -79,7 +78,7 @@
         {% endif %}
         {% endfor %}
         </div>
-        {% endif %}
+
     </div>
 </div>
 {% endblock %}
